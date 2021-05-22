@@ -86,19 +86,19 @@ paper-dashboard-angular
 │   │   ├── app.component.spec.ts
 │   │   ├── app.component.ts
 │   │   ├── app.module.ts
-│   │   ├── app.routing.ts
+│   │   ├── app-routing.module.ts
 │   │   ├── layouts
 │   │   │   └── admin-layout
 │   │   │       ├── admin-layout.component.html
 │   │   │       ├── admin-layout.component.scss
-│   │   │       ├── admin-layout.component.spec.ts
-│   │   │       ├── admin-layout.component.ts
-│   │   │       ├── admin-layout.module.ts
-│   │   │       └── admin-layout.routing.ts
+│   │   │       ├── accueil.component.spec.ts
+│   │   │       ├── Client.component.ts
+│   │   │       ├── accueil.module.ts
+│   │   │       └── accueil.routing.ts
 │   │   ├── pages
 │   │   │   ├── dashboard
 │   │   │   │   ├── dashboard.component.html
-│   │   │   │   └── dashboard.component.ts
+│   │   │   │   └── accueil.component.ts
 │   │   │   ├── icons
 │   │   │   │   ├── icons.component.html
 │   │   │   │   └── icons.component.ts

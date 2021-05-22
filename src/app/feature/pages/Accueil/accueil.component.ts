@@ -5,10 +5,10 @@ import Chart from 'chart.js';
 @Component({
     selector: 'dashboard-cmp',
     moduleId: module.id,
-    templateUrl: 'dashboard.component.html'
+    templateUrl: 'accueil.component.html'
 })
 
-export class DashboardComponent implements OnInit{
+export class AccueilComponent implements OnInit{
 
   public canvas : any;
   public ctx;
