@@ -6,25 +6,40 @@
       </div>
     </a>
     <a href="https://www.creative-tim.com" class="simple-text logo-normal">
-      Creative Tim
+    Samati Clinet
     </a>
   </div>
+
   <ul class="nav">
     <li *ngFor="let menuItem of menuItems" routerLinkActive="active" class="{{menuItem.class}}">
-      <a href="#{{menuItem.id}}" class="collapsed" aria-expanded="false" aria-controls="{{menuItem.id}}"
-        data-toggle="collapse">
-        <i class="nc-icon {{menuItem.icon}}"></i>
-        <p>{{menuItem.title}}</p>
-      </a>
+<ng-container  *ngIf="menuItem.subMenus; else internalBlock">
+  <a  href="#{{menuItem.id}}" class="collapsed" aria-expanded="false" aria-controls="{{menuItem.id}}"
+      data-toggle="collapse">
+    <i class="nc-icon {{menuItem.icon}}"></i>
+    <p style="font-weight: bold;">{{menuItem.title}}</p>
+    <span style="font-weight: bold;"><b style="margin-top: 9px;" class="caret ml-2"></b> </span>
+  </a>
+</ng-container>
+
+      <ng-template #internalBlock>
+        <a [routerLink]="menuItem.path"  class="collapsed" aria-expanded="false" aria-controls="{{menuItem.id}}"
+            data-toggle="collapse">
+          <i class="nc-icon {{menuItem.icon}}"></i>
+          <p style="font-weight: bold;">{{menuItem.title}}</p>
+        </a>
+      </ng-template>
+
       <div class="collapse" id="{{menuItem.id}}">
+
     <li *ngFor="let subMenu of menuItem.subMenus" routerLinkActive="active" class="{{subMenu.class}}">
-      <a href="#{{subMenu.id}}" class="collapsed" aria-expanded="false" aria-controls="{{subMenu.id}}"
+      <a [routerLink]="subMenu.path" href="#{{subMenu.id}}" class="collapsed" aria-expanded="false" aria-controls="{{subMenu.id}}"
         data-toggle="collapse">
         <i class="nc-icon {{subMenu.icon}}"></i>
-        <p>{{subMenu.title}}</p>
+        <p style="font-size: 11px;font-family: system-ui;">{{subMenu.title}}</p>
       </a>
+  </li>
       </div>
-    </li>
+
   </ul>
 </div>
 

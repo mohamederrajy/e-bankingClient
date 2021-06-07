@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import Chart from 'chart.js';
+import {DashboradModel} from '../../Core/Models/dashboard-model/dashboard-model.component';
+import {ComptsModel} from '../../Core/Models/Compts-model/Compts-model.component';
+import {TransactionModel} from '../../Core/Models/Transaction-model/Transaction-model.component';
 @Component({
   selector: 'app-accueil',
   templateUrl: './accueil.component.html',
@@ -7,7 +10,9 @@ import Chart from 'chart.js';
 })
 export class AccueilComponent implements OnInit {
   selectedValue = null;
-
+  public dashboradModel:DashboradModel;
+  public transactionModel:TransactionModel[];
+  public comptsModel:ComptsModel [];
   public canvas : any;
   public ctx;
   public chartColor;
@@ -15,6 +20,42 @@ export class AccueilComponent implements OnInit {
   public chartHours;
 
   ngOnInit(){
+
+    this.comptsModel =[
+      {
+         id:1,
+        num_compte :34445678,
+        devis:"MAD",
+        intitule:"MOHAMED ER-RAJY",
+        solde:10000,
+      operations:  this.transactionModel
+
+
+      },
+      {
+        id:2,
+        num_compte :4255436,
+        devis:"MAD",
+        intitule:"MOHAMED ER-RAJY",
+        solde:20000,
+        operations:  this.transactionModel
+
+
+
+      },
+    ]
+
+
+    this.dashboradModel={
+      credit:1222,
+      bloce:122,
+      debit:120,
+      echoues:12,
+      comptes:this.comptsModel,
+
+    }
+
+
     this.chartColor = "#FFFFFF";
 
     this.canvas = document.getElementById("chartHours");

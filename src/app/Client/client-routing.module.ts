@@ -34,9 +34,13 @@ const routes: Routes = [
         path: 'mes-demandes-en-ling',
         loadChildren: () => import('../Client/mes-demandes-en-ling/mes-demandes-en-ling.module').then(m => m.MesDemandesEnLingModule) ,
       },
+      {
+        path: 'Contactez-Nous',
+        loadChildren: () => import('./contactez-nous/contactez-nous.module').then(m => m.ContactezNousModule)      },
+
 
     ]
-  }
+  },
 
 ];
 
