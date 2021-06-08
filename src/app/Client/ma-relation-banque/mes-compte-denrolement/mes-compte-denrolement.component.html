@@ -1,0 +1,54 @@
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">La Liste Des Operations </h4>
+      </div>
+      <nz-table #nzTable [nzData]="comptes" nzTableLayout="fixed">
+        <thead>
+        <tr>
+          <th>Show Operations</th>
+          <th>Numero de compte</th>
+          <th >intitule</th>
+          <th>Devise</th>
+          <th>Solde</th>
+        </tr>
+        </thead>
+        <tbody>
+        <ng-container *ngFor="let data of comptes">
+          <tr>
+            <td [nzExpand]="expandSet.has(data.id)" (nzExpandChange)="onExpandChange(data.id, $event)"></td>
+            <td>{{ data.num_compte }}</td>
+            <td>{{ data.intitule }}</td>
+            <td>{{ data.devis }}</td>
+            <td>{{ data.solde }}</td>
+          </tr>
+          <tr [nzExpand]="expandSet.has(data.id)">
+            <nz-table #innerTable [nzData]="transactionModel" nzSize="middle" [nzShowPagination]="false">
+        <thead>
+        <tr style="background-color: #00bbff;">
+          <th >Date de operation </th>
+          <th>Libilee de le operation</th>
+          <th style="color:#4CD964;"> <p> <i nz-icon nzType="up-circle" nzTheme="outline">  &ensp; debit </i> </p></th>
+          <th style="color:#d94c4c;"> <p> <i nz-icon nzType="down-circle" nzTheme="outline"> &ensp; credit</i></p> </th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let op of transactionModel">
+          <td>{{ op.dateop }}</td>
+          <td>{{ op.Libell }}</td>
+          <td>{{ op.debit }}</td>
+          <td>{{ op.credit }}</td>
+        </tr>
+        </tbody>
+      </nz-table>
+          </tr>
+        </ng-container>
+        </tbody>
+      </nz-table>
+        </div>
+      </div>
+    </div>
+

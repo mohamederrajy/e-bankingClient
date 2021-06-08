@@ -1,0 +1,157 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Effectuer Un Virement </h4>
+      </div>
+      <div class="card-body">
+
+        <form  #f ="ngForm"  [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm(f.value)">
+          <div nz-row >
+            <div nz-col nzSpan="24" class="Qrow">
+
+            <nz-form-item >
+                <nz-form-label [nzSm]="5" [nzXs]="12" [nzSpan]="" nzFor="Compte" nzRequired>compte à débiter</nz-form-label>
+              <nz-form-control [nzSpan]=""  nzErrorTip="Please select your Compte!">
+                <nz-select
+                  id="Compte" formControlName="Comptes" nzPlaceHolder="Select Compte"
+                  nzAllowClear>
+                  <nz-option *ngFor="let compte of clinet.Comptes" [nzLabel]="compte.num_compte" [nzValue]="compte"></nz-option>
+                </nz-select>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          </div>
+          <div nz-row >
+            <div nz-col nzSpan="19" class="Qrow">
+
+          <nz-form-item >
+            <nz-form-label [nzSm]="6" [nzXs]="12" [nzSpan]="" nzFor="Compte" nzRequired>compte de Beneficiaire </nz-form-label>
+            <nz-form-control [nzSpan]="" nzErrorTip="Please select your Compte!">
+              <nz-select
+                id="bninfceir" formControlName="Beneficiaire" nzPlaceHolder="Select Beneficiaire"
+                nzAllowClear>
+                <nz-option *ngFor="let benf of clinet.Beneficiaires" [nzLabel]="benf.Libelle" [nzValue]="benf"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+            </div>
+            <div nz-col nzSpan="5">
+            <nz-form-item>
+              <nz-form-control [nzSpan]="" nzErrorTip="Please select your choix!">
+                <button style="padding: 9px;margin: 0px;width: 100%;margin-left: 3px;" class="btn btn-primary" (click)="createTplModal(tplTitle, tplContent, tplFooter)">Ajouter</button>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          </div>
+
+          <div nz-row >
+            <div nz-col nzSpan="24" class="Qrow">
+
+              <nz-form-item >
+                <nz-form-label [nzSm]="5" [nzXs]="12" [nzSpan]="" nzFor="montant" nzRequired>montant</nz-form-label>
+                <nz-form-control [nzSpan]=""  nzErrorTip="Please inpute  your montant!">
+                  <input type="text" nz-input formControlName="montant" placeholder="montant" />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+          <div nz-row >
+            <div nz-col nzSpan="24" class="Qrow">
+
+              <nz-form-item >
+                <nz-form-label [nzSm]="5" [nzXs]="12" [nzSpan]="" nzFor="montant" nzRequired>motif</nz-form-label>
+                <nz-form-control [nzSpan]=""  nzErrorTip="Please inpute  your motif!">
+                  <input type="text" nz-input formControlName="motif" placeholder="motif" />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+          <div nz-row >
+            <div nz-col nzSpan="7" class="Qrow">
+              <p style="color: #ED362C">* indique un champ obligatoir</p>
+
+            </div>
+            <div nz-col nzSpan="17" class="Qrow">
+
+              <button style="width: 100%;" class="btn btn-success" type="submit" >Valide</button>
+
+
+          </div>
+          </div>
+        </form>
+
+
+
+
+
+    </div>
+
+
+    </div>
+  </div>
+
+  <ng-template #tplTitle>
+    <span>ajaouter bn</span>
+  </ng-template>
+
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Liste de Beneficiaire </h4>
+      </div>
+      <div class="card-body">
+        <nz-table #basicTable [nzData]="{client:clinet}" >
+          <thead>
+          <tr>
+            <th>Numéro de Compte</th>
+            <th>Intitulé</th>
+            <th>Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let benf of clinet.Beneficiaires  ">
+            <td>{{benf.numercompte}}</td>
+            <td>{{benf.Libelle}}</td>
+            <td>
+            <button class="btn btn-danger"> delete </button>
+              <button class="btn btn-info">edit</button>
+
+            </td>
+          </tr>
+          </tbody>
+        </nz-table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #tplContent let-params let-ref="modalRef">
+  <form  #f ="ngForm"  [formGroup]="validateFormben" class="login-form" (ngSubmit)="addnewB(f.value)">
+
+    <nz-form-item>
+      <nz-form-control   [nzSpan]="24" nzErrorTip="Please enter your Libelle!">
+        <input type="text" nz-input formControlName="Libelle" placeholder="Libelle" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control [nzSpan]="24" nzErrorTip="Please enter your numero de compte!">
+        <input type="text" nz-input formControlName="numercompte" placeholder="numero de compte" />
+      </nz-form-control>
+    </nz-form-item>
+    <button type="submit" style="width: 100%;" class="btn btn-primary"  (click)="ref.destroy()">Ajouter</button>
+    <button (click)="ref.destroy()" type="submit" style="width: 100%;" class="btn btn-danger" >Close</button>
+
+  </form>
+</ng-template>
+<ng-template #tplFooter let-ref="modalRef">
+
+</ng-template>
+
+
+
