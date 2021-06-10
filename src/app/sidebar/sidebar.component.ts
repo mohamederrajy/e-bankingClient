@@ -15,6 +15,7 @@ export interface RouteInfo {
 // @ts-ignore
 export const ROUTES: RouteInfo[] = [
   { path: '/Client/Accueil', id: 'Accueil', title: 'Accueil', icon: 'nc-bank', class: '', hasSubMen: true,},
+  { path: '/Client/profil', id: 'profil', title: 'Profil', icon: 'nc-bank', class: '', hasSubMen: true,},
   { path: '/Client/Ma_Relation_Banque', id: 'Ma', title: 'Ma Relation Banque', icon: 'nc-icon nc-favourite-28', hasSubMen: false, class: '' , subMenus:[
       { path: '/Client/Ma_Relation_Banque/Mes_Compte_denrolement', id: 'Mes_Compte_denrolement', title: 'Mes enrolements', icon: 'nc-icon nc-single-02', class: 'ml-3 lead'},
     ]
@@ -22,8 +23,6 @@ export const ROUTES: RouteInfo[] = [
   { path: '/Client/me-trasactions', id: 'Mes', title: 'Mes Transactions', icon: 'nc-pin-3', class: '' , subMenus:[
       { path: '/Client/me-trasactions/effectuer-des-virements', id: 'effectuer-des-virements', title: 'effectuer virements', icon: 'nc-icon nc-single-02', class: 'ml-3 lead'},
       { path: '/Client/me-trasactions/recharge-telecom', id: 'recharge-telecom', title: 'Recharge Telecom', icon: 'nc-icon nc-single-02', class: 'ml-3 lead'},
-      { path: '/Client/me-trasactions/transfert-de-fonds', id: 'transfert-de-fonds', title: 'transfert de fonds', icon: 'nc-icon nc-single-02', class: 'ml-3 lead'},
-      { path: '/Client/me-trasactions/verifier-solde', id: 'verifier-solde', title: 'verifier solde', icon: 'nc-icon nc-single-02', class: 'ml-3 lead'},
 
     ]
   },

@@ -17,13 +17,8 @@ const routes: Routes = [
         path: 'recharge-telecom',
         loadChildren: () => import('./recharge-telecom/recharge-telecom.module').then(m => m.RechargeTelecomModule)
       },
-      {
-        path: 'transfert-de-fonds',
-        loadChildren: () => import('./transfert-de-fonds/transfert-de-fonds.module').then(m => m.TransfertDeFondsModule)
-      },
-      {
-        path: 'verifier-solde',
-        loadChildren: () => import('./verifier-solde/verifier-solde.module').then(m => m.VerifierSoldeModule)      },
+
+
     ]
   },
 ]

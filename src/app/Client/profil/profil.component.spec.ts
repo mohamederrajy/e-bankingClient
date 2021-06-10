@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { VerifierSoldeComponent } from './verifier-solde.component';
+import { ProfilComponent } from './profil.component';
 
-describe('VerifierSoldeComponent', () => {
-  let component: VerifierSoldeComponent;
-  let fixture: ComponentFixture<VerifierSoldeComponent>;
+describe('TransdertDeFondsComponent', () => {
+  let component: ProfilComponent;
+  let fixture: ComponentFixture<ProfilComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ VerifierSoldeComponent ]
+      declarations: [ ProfilComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(VerifierSoldeComponent);
+    fixture = TestBed.createComponent(ProfilComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

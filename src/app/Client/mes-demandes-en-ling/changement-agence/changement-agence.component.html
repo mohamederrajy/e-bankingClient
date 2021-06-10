@@ -17,6 +17,125 @@
         </div>
       </div>
       <div class="card-body">
+        <form  #f ="ngForm"  [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm(f.value)">
+
+        <div nz-row >
+          <div nz-col nzSpan="24" class="Qrow">
+            <nz-form-item >
+              <nz-form-label [nzSm]="5" [nzXs]="12" [nzSpan]="" nzFor="agenceac" >agence actuelle</nz-form-label>
+              <nz-form-control [nzSpan]=""  nzErrorTip="">
+                <input type="text" nz-input formControlName="agenceac" placeholder="{{clinet.agence.ville}}"  [disabled]="true"/>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+        </div>
+
+
+      <p class="h4 text-danger ml-4"><i class="nc-icon nc-minimal-down text-danger mt-7"></i>
+        Nouvelle agence</p>
+
+      <div nz-row >
+        <div nz-col nzSpan="23" class="Qrow">
+
+          <nz-form-item >
+            <nz-form-label [nzSm]="5" [nzXs]="12" [nzSpan]="" nzFor="ville" nzRequired>ville</nz-form-label>
+            <nz-form-control [nzSpan]=""  nzErrorTip="Please select your ville!">
+              <nz-select
+                id="ville" formControlName="ville" nzPlaceHolder="Select ville"
+                nzAllowClear>
+                <nz-option *ngFor="let ville of villes" [nzLabel]="ville.ville" [nzValue]="ville"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
+        <div nz-row >
+          <div nz-col nzSpan="23">
+
+            <nz-form-item >
+              <nz-form-label [nzSm]="5" [nzXs]="12" [nzSpan]="" nzFor="agence" nzRequired>Agence choisie</nz-form-label>
+              <nz-form-control [nzSpan]=""  nzErrorTip="Please select your agence!">
+                <nz-select
+                  id="agence" formControlName="agence" nzPlaceHolder="Select agence"
+                  nzAllowClear>
+                  <nz-option *ngFor="let ville of villes" [nzLabel]="ville.ville" [nzValue]="ville"></nz-option>
+                </nz-select>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+        </div>
+        <div nz-row >
+          <div nz-col nzSpan="23">
+
+            <nz-form-item >
+              <nz-form-label [nzSm]="5" [nzXs]="12" [nzSpan]="" nzFor="motif" nzRequired>Motif</nz-form-label>
+              <nz-form-control [nzSpan]=""  nzErrorTip="Please inpute  your motif!">
+                <input id="motif" type="text" nz-input formControlName="motif" placeholder="Motif" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+        </div>
+        <div nz-row >
+        <div nz-col nzSpan="23">
+
+          <nz-form-item >
+            <nz-form-label [nzSm]="5" [nzXs]="12" [nzSpan]="" nzFor="compte" nzRequired>compte à débiter</nz-form-label>
+            <nz-form-control [nzSpan]=""  nzErrorTip="Please select your compte!">
+              <nz-select
+                id="compte" formControlName="compte" nzPlaceHolder="Select compte"
+                nzAllowClear>
+                <nz-option *ngFor="let compt of clinet.Comptes" [nzLabel]="compt.num_compte" [nzValue]="compt"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+    </div>
+
+        <p class="h7 text-danger ml-4">(*)
+          Ce Service est soumis a une vérification (55 Dhs TTc pour le changement de vill et 200Dhs pour changement au sein de la meme ville ) Veullez choisir le compte a débiter.
+        </p>
+        <div >
+
+          <button style=" float: right;margin-right: 19px;" class="btn btn-success" type="submit" >Valide</button>
+
+
+        </div>
+       </form>
+    </div>
+  </div>
+</div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Votre demande</h4>
+        <nz-table #basicTable [nzData]="{demande:demande}">
+          <thead>
+          <tr>
+            <th>Numéro de Compte</th>
+            <th>ville</th>
+            <th>agence</th>
+            <th>motif</th>
+            <th>Action</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let dem of demande  ">
+            <td>{{dem.compte.num_compte}}</td>
+            <td>{{dem.ville.ville}}</td>
+            <td>{{dem.agence.ville}}</td>
+            <td>{{dem.motif}}</td>
+            <td>  <button class="btn btn-danger">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                <path d="M1.293 1.293a1 1 0 0 1 1.414 0L8 6.586l5.293-5.293a1 1 0 1 1 1.414 1.414L9.414 8l5.293 5.293a1 1 0 0 1-1.414 1.414L8 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L6.586 8 1.293 2.707a1 1 0 0 1 0-1.414z"/>
+              </svg>
+            </button></td>
+          </tr>
+          </tbody>
+        </nz-table>
+      </div>
+      <div class="card-body">
       </div>
     </div>
   </div>

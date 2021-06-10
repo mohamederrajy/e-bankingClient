@@ -10,21 +10,23 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {NzButtonModule} from 'ng-zorro-antd/button';
 import {NzTableModule} from 'ng-zorro-antd/table';
 import {NzIconModule} from 'ng-zorro-antd/icon';
+import {MatIconModule} from '@angular/material/icon';
 
 
 @NgModule({
   declarations: [EffectuerDesVirementsComponent],
-  imports: [
-    NzInputModule,
-    NzModalModule,
-    CommonModule,
-    EffectuerDesVirementsRoutingModule,
-    NzFormModule,
-    NzSelectModule,
-    ReactiveFormsModule,
-    NzButtonModule,
-    NzTableModule,
-    NzIconModule
-  ]
+    imports: [
+        NzInputModule,
+        NzModalModule,
+        CommonModule,
+        EffectuerDesVirementsRoutingModule,
+        NzFormModule,
+        NzSelectModule,
+        ReactiveFormsModule,
+        NzButtonModule,
+        NzTableModule,
+        NzIconModule,
+        MatIconModule
+    ]
 })
 export class EffectuerDesVirementsModule { }

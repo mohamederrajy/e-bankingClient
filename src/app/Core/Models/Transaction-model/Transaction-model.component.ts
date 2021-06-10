@@ -1,7 +1,7 @@
 import {ComptsModel} from '../Compts-model/Compts-model.component';
 export class TransactionModel {
-  credit !:number;
-  debit !:number;
+  amount!:number;
+  transactionType!:string;
   Libell!:string;
   dateop: string ;
 

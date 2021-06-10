@@ -19,6 +19,10 @@ const routes: Routes = [
        path: 'Accueil',
         loadChildren: () => import('../Client/accueil/accueil.module').then(m => m.AccueilModule) ,
       },
+      {
+        path: 'profil',
+        loadChildren: () => import('../Client/profil/profil.module').then(m => m.ProfilModule) ,
+      },
 
       {
         path: 'Ma_Relation_Banque',

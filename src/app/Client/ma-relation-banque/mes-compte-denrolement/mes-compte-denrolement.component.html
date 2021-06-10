@@ -1,10 +1,12 @@
 
+<script src="mes-compte-denrolement.component.ts"></script>
 <div class="row">
   <div class="col-md-12">
     <div class="card">
       <div class="card-header">
         <h4 class="card-title">La Liste Des Operations </h4>
       </div>
+
       <nz-table #nzTable [nzData]="comptes" nzTableLayout="fixed">
         <thead>
         <tr>
@@ -25,7 +27,7 @@
             <td>{{ data.solde }}</td>
           </tr>
           <tr [nzExpand]="expandSet.has(data.id)">
-            <nz-table #innerTable [nzData]="transactionModel" nzSize="middle" [nzShowPagination]="false">
+            <nz-table #innerTable [nzData]="data.operations" nzSize="middle" [nzShowPagination]="false">
         <thead>
         <tr style="background-color: #00bbff;">
           <th >Date de operation </th>
@@ -36,11 +38,17 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let op of transactionModel">
+        <tr *ngFor="let op of innerTable.data" [class]="op.transactionType=='credit' ? 'bg-danger':'bg-success'">
           <td>{{ op.dateop }}</td>
           <td>{{ op.Libell }}</td>
-          <td>{{ op.debit }}</td>
-          <td>{{ op.credit }}</td>
+          <ng-container *ngIf="op.transactionType=='debit'; else elseSpan">
+            <td>{{op.amount}}</td>
+            <td>0</td>
+          </ng-container>
+          <ng-template #elseSpan>
+            <td>0</td>
+            <td>{{op.amount}}</td>
+          </ng-template>
         </tr>
         </tbody>
       </nz-table>

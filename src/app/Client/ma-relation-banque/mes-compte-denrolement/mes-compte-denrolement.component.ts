@@ -30,14 +30,14 @@ export class MesCompteDenrolementComponent implements OnInit {
 
      this.transactionModel=[
        {
-         credit:null,
-         debit:1220 ,
-        dateop:"11/04/2021",
-         Libell:"Versement de  mohamed errajy"
+         transactionType:"debit",
+          amount:1222,
+         dateop:"11/04/2021",
+         Libell:"Versement de  brahim dlkhraa"
        },
        {
-         credit:1200,
-         debit:null ,
+         transactionType:"credit",
+         amount:142,
          dateop:"11/04/2021",
          Libell:"Retrait  de  mohamed errajy"
 

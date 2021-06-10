@@ -6,6 +6,7 @@ import {TransactionModel} from '../../../Core/Models/Transaction-model/Transacti
 import {BeneficiaireModel} from '../../../Core/Models/beneficiaire-model/beneficiaire-model.component';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {NzModalRef, NzModalService} from 'ng-zorro-antd/modal';
+import {AgenceModel} from '../../../Core/Models/Agence-model/Agence-model.component';
 
 @Component({
   selector: 'app-effectuer-des-virements',
@@ -20,6 +21,7 @@ export class EffectuerDesVirementsComponent implements OnInit {
   public transactionModel:TransactionModel[];
   public beneficiaires:BeneficiaireModel[];
   public beneficiaire:BeneficiaireModel;
+  public agence:AgenceModel;
   constructor(private formBuilder: FormBuilder,private modal: NzModalService, private viewContainerRef: ViewContainerRef) { }
 
   tplModalButtonLoading = false;
@@ -27,10 +29,20 @@ export class EffectuerDesVirementsComponent implements OnInit {
 
 
   ngOnInit(): void {
- this.beneficiaires=[
+    this.agence={
+      ville:"agadir"
+
+    }
+ // @ts-ignore
+    // @ts-ignore
+    this.beneficiaires=[
    {
-     numercompte:334567890,
-     Libelle:"brahimp affsy"
+     accountNum:2451524,
+     firstname:"mohamed",
+     lastName:"raij",
+     tele:45636362,
+     email:"mohedm@gmail.com"
+
 
    },
 
@@ -39,14 +51,14 @@ export class EffectuerDesVirementsComponent implements OnInit {
 
     this.transactionModel=[
       {
-        credit:null,
-        debit:1220 ,
+        transactionType:"debit ",
+        amount:1222,
         dateop:"11/04/2021",
         Libell:"Versement de  mohamed errajy"
       },
       {
-        credit:1200,
-        debit:null ,
+        transactionType:"credit ",
+        amount:1222,
         dateop:"11/04/2021",
         Libell:"Retrait  de  mohamed errajy"
 
@@ -86,7 +98,8 @@ export class EffectuerDesVirementsComponent implements OnInit {
       sex:"M",
       phone:38998989443,
       Comptes :this.comptes,
-      Beneficiaires:this.beneficiaires
+      Beneficiaires:this.beneficiaires,
+      agence: this.agence
 
     }
     this.validateForm = this.formBuilder.group({
@@ -98,8 +111,12 @@ export class EffectuerDesVirementsComponent implements OnInit {
 
     });
     this.validateFormben = this.formBuilder.group({
-      Libelle: [null, [Validators.required]],
-      numercompte: [null, [Validators.required]],
+      tele: [null, [Validators.required]],
+      accountNum: [null, [Validators.required]],
+      lastName: [null, [Validators.required]],
+      email: [null, [Validators.required]],
+      firstname: [null, [Validators.required]],
+
 
     });
 
@@ -107,8 +124,14 @@ export class EffectuerDesVirementsComponent implements OnInit {
   }
 
   submitForm(value: any) {
-
+  if(value.Comptes!=null && value.Beneficiaire!=null && value.montant && value.motif!=null){
     console.log(value);
+
+  }
+    for (const i in this.validateForm.controls) {
+      this.validateForm.controls[i].markAsDirty();
+      this.validateForm.controls[i].updateValueAndValidity();
+    }
 
   }
 
@@ -139,10 +162,14 @@ export class EffectuerDesVirementsComponent implements OnInit {
 
 
   addnewB(data: any) {
-    if(data.numercompte!=null && data.Libelle!=null){
+    console.log(data)
+    if(data.accountNum!=null && data.firstname!=null && data.lastName!=null && data.tele!=null && data.email !=null ){
       this.beneficiaire={
-        Libelle:data.Libelle,
-        numercompte:data.numercompte
+    accountNum:data.accountNum,
+        tele:data.tele,
+        email:data.email,
+        lastName:data.lastName,
+        firstname:data.firstname
       }
       this.clinet.Beneficiaires.push(this.beneficiaire);
 

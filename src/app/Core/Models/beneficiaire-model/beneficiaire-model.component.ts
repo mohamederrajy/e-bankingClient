@@ -1,5 +1,8 @@
 
 export class BeneficiaireModel {
-  Libelle !:string;
-  numercompte !:number;
+  firstname !:string;
+  accountNum !:number;
+  lastName !:string;
+  tele!:number;
+  email !:string;
 }
