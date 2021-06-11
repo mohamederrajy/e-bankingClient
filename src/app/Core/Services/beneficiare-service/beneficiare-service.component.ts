@@ -34,9 +34,16 @@ export class BeneficiareService {
     let host=environment.host
     return this.http.get<BeneficiaireModel[]>(host+"benificier/me",{headers})
   }
-  DeleteBeneficiares(){
+  DeleteBeneficiares(id:number){
+    const jwt =localStorage.getItem('jwt')
+    console.log(jwt);
+    const headers= {
+      'Content-Type':  'application/json',
+      Authorization: 'Bearer '+jwt,
+
+    }
     let host=environment.host
-    return this.http.delete(host+"delete")
+    return this.http.delete(host+"benificier/"+id,{headers})
   }
 
 }

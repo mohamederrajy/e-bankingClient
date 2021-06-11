@@ -9,6 +9,8 @@ export class ClientModel {
   username!: number;
   tele!:string;
   cin!:string;
+  agency:AgenceModel;
+  accounts:CompteModel[];
 
 
 

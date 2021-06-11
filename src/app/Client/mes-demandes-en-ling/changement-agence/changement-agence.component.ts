@@ -13,6 +13,7 @@ import {DashboradModel} from '../../../Core/Models/dashboard-model/dashboard-mod
 import {catchError, map, startWith} from 'rxjs/operators';
 import {AgenceService} from '../../../Core/Services/agence-service/beneficiare-service.component';
 import {CompteService} from '../../../Core/Services/compte-service/compte-service.component';
+import {ClientService} from '../../../Core/Services/client-service/client-service.component';
 @Component({
   selector: 'app-changement-agence',
   templateUrl: './changement-agence.component.html',
@@ -2001,7 +2002,7 @@ export class ChangementAgenceComponent implements OnInit {
     }
   ];
 
-  constructor(private compteService:CompteService ,private agenceService:AgenceService,private formBuilder: FormBuilder,private demandeService:DemandeService) { }
+  constructor(private clientservice:ClientService, private compteService:CompteService ,private agenceService:AgenceService,private formBuilder: FormBuilder,private demandeService:DemandeService) { }
 
   ngOnInit(): void {
 
@@ -2016,15 +2017,9 @@ export class ChangementAgenceComponent implements OnInit {
       compte:[null, [Validators.required]],
     });
 
-    this.agence={
-      ville:"agadir",
-      tele:"267890°",
-      name:"effgld",
-      adress:"edfjkgf",
-
-    }
     this.beneficiaires=[
       {
+        id:23,
        email:"gfefe",
         tele:426152,
         lastName:"dfhef",
@@ -2056,9 +2051,7 @@ export class ChangementAgenceComponent implements OnInit {
       }
     ]
 
-    this.comptes =[
 
-    ]
 
   }
 
@@ -2110,11 +2103,11 @@ OnGetAllAgences(){
   OnGetAgences(){
     this.loading = true;
     this.errorMessage = "";
-    this.agenceService.GetClientAgence()
+    this.clientservice.GetClient()
       .subscribe(
         (response) => {                           //next() callback
           console.log('response received')
-          this.agence = response;
+          this.clinet = response;
         },
         (error) => {                              //error() callback
           console.error('Request failed with error')

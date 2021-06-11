@@ -12,6 +12,7 @@ import {Observable, of} from 'rxjs';
 import {AppDataState,DataStateEnum} from '../../../../state/client.state';
 import {catchError, map, startWith} from 'rxjs/operators';
 import {CompteService} from '../../../Core/Services/compte-service/compte-service.component';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-effectuer-des-virements',
@@ -22,6 +23,7 @@ export class EffectuerDesVirementsComponent implements OnInit {
   beneficiair$: Observable<AppDataState<BeneficiaireModel[]>> | null=null;
   DataStateEnum=DataStateEnum
   validateForm!: FormGroup;
+  saved:any;
   validateFormben!: FormGroup;
   public clinet:ClientModel;
   public comptes:CompteModel [];
@@ -32,7 +34,7 @@ export class EffectuerDesVirementsComponent implements OnInit {
   public agence:AgenceModel;
   loading: boolean = false;
   errorMessage;
-  constructor(private compteService:CompteService , private transactionService:TransactionService, private formBuilder: FormBuilder,private modal: NzModalService, private viewContainerRef: ViewContainerRef,private beneficiareService:BeneficiareService) { }
+  constructor(private router: Router,private compteService:CompteService , private transactionService:TransactionService, private formBuilder: FormBuilder,private modal: NzModalService, private viewContainerRef: ViewContainerRef,private beneficiareService:BeneficiareService) { }
 
   tplModalButtonLoading = false;
   disabled = false;
@@ -42,45 +44,6 @@ export class EffectuerDesVirementsComponent implements OnInit {
     this. OnGetAccount();
     this. OnGetBeneficiair1()
     this.OnGetBeneficiair();
-    this.agence={
-      ville:"agadir",
-      adress:"jfedv",
-      name:"hduc",
-      tele:"defvlkl",
-
-    }
- // @ts-ignore
-    // @ts-ignore
-
-
-
-    this.transactionModel=[
-      {
-        cretaedAt: "11/11/2021",
-        transactionType:"debit",
-        amount:1222,
-        description:"sdh",
-        benificier:this.beneficiaire,
-        Libell:"Retrait  de  mohamed errajy"
-
-
-
-      },
-      {
-        cretaedAt: "11/11/2021",
-        transactionType:"credit ",
-        amount:1222,
-description:"dnjfnc",
-        benificier:this.beneficiaire,
-        Libell:"Retrait  de  mohamed errajy"
-
-      }
-    ]
-
-    this.comptes =[
-
-    ]
-
     this.validateForm = this.formBuilder.group({
       Comptes: [null, [Validators.required]],
       Beneficiaire: [null, [Validators.required]],
@@ -153,15 +116,14 @@ description:"dnjfnc",
   addnewB(data: any) {
     if(data.accountNum!=null && data.firstname!=null && data.lastName!=null && data.tele!=null && data.email !=null ){
       this.beneficiaire={
+        id:undefined,
         accountNum:data.accountNum,
         tele:data.tele,
         email:data.email,
         lastName:data.lastName,
         firstname:data.firstname
       }
-   console.log(data)
-      this.beneficiareService.SaveBeneficiare(this.beneficiaire);
-
+   this.onSeveBenificier(this.beneficiaire);
     }
 
 
@@ -194,10 +156,6 @@ description:"dnjfnc",
   })
 }
 
-  deletebenf(benf: BeneficiaireModel) {
-    this.beneficiareService.DeleteBeneficiares();
-
-  }
 
   OnGetAccount(){
     this.compteService.GetComptes()
@@ -216,4 +174,22 @@ description:"dnjfnc",
           this.loading = false;
         })
   }
+  onSeveBenificier(beneficiaire:BeneficiaireModel){
+    this.beneficiareService.SaveBeneficiare(this.beneficiaire).subscribe(data => {
+      this.saved=data;
+      this.validateFormben.reset();
+      window.location.reload();
+      alert('succsess')
+    })
+  }
+
+ onDeleteBenificier(benf: BeneficiaireModel) {
+
+    this.beneficiareService.DeleteBeneficiares(benf.id).subscribe(data => {
+      this.saved=data;
+      alert('deleted')
+      window.location.reload();
+
+    })
+ }
 }
