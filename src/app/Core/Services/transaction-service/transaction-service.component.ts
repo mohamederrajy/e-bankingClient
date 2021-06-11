@@ -12,8 +12,15 @@ export class TransactionService {
   constructor(private http:HttpClient) { }
 
   SaveTransaction(transaction:TransactionModel):Observable<TransactionModel>{
+    const jwt =localStorage.getItem('jwt')
+    console.log(jwt);
+    const headers= {
+      'Content-Type':  'application/json',
+      Authorization: 'Bearer '+jwt,
+
+    }
     let host=environment.host
-    return  this.http.post<TransactionModel>(host+"transaction",transaction)
+    return  this.http.post<TransactionModel>(host+"transaction",transaction,{headers})
   }
 
 }

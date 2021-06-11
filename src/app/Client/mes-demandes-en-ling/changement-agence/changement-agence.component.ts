@@ -2031,26 +2031,6 @@ export class ChangementAgenceComponent implements OnInit {
     ]
 
 
-    this.transactionModel=[
-      {
-        cretaedAt: "11/11/2021",
-        transactionType:"debit ",
-        amount:1222,
-      description:"hdeuf",
-        benificier:this.beneficiaires[0],
-        Libell:"Retrait  de  mohamed errajy"
-      },
-      {
-        cretaedAt: "11/11/2021",
-        transactionType:"credit ",
-        amount:1222,
-       description:"tzedzed",
-        benificier:this.beneficiaires[0],
-        Libell:"Retrait  de  mohamed errajy"
-
-      }
-    ]
-
 
 
   }

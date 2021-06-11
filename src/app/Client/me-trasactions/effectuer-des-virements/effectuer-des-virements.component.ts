@@ -68,15 +68,16 @@ export class EffectuerDesVirementsComponent implements OnInit {
   submitForm(value: any) {
   if(value.Comptes!=null && value.Beneficiaire!=null && value.montant && value.motif!=null){
     this.transaction={
-      cretaedAt: "11/11/2021",
       benificier:value.Beneficiaire,
-     description:"test",
-      amount:value.amount,
+      description:value.motif,
+      amount:value.montant,
+      type:"VIREMENT",
       transactionType:"debit",
-      Libell:"Retrait de montant"+value.amount+"vers"+value.Beneficiaire.firstname,
+      account:value.Comptes,
+      name:"VIREMENT de montant "+value.montant+"  "+"vers"+value.Beneficiaire.firstname,
 
     }
-    this.transactionService.SaveTransaction(this.transaction);
+    this.onSaveTransaction(this.transaction);
     console.log( this.transaction)
 
   }
@@ -191,5 +192,14 @@ export class EffectuerDesVirementsComponent implements OnInit {
       window.location.reload();
 
     })
+ }
+ onSaveTransaction (transaction:TransactionModel){
+   this.transactionService.SaveTransaction(transaction).subscribe(data => {
+     this.saved=data;
+     this.validateFormben.reset();
+     window.location.reload();
+     alert('succsess')
+   })
+
  }
 }
