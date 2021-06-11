@@ -141,7 +141,9 @@
           <tr *ngFor="let dem of result.data  ">
             <td>{{dem.account.accountNum}}</td>
             <td>{{dem.ville}}</td>
-            <td>{{dem.agnceToTransfer}}</td>
+            <td>{{dem.agnceToTransfer.ville}}</td>
+            <td>{{dem.motif}}</td>
+
 
             <td>  <button class="btn btn-danger" (click)="Ocancel(dem)">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">

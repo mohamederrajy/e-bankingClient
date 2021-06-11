@@ -2001,6 +2001,7 @@ export class ChangementAgenceComponent implements OnInit {
       "region": "1"
     }
   ];
+  private saved: any;
 
   constructor(private clientservice:ClientService, private compteService:CompteService ,private agenceService:AgenceService,private formBuilder: FormBuilder,private demandeService:DemandeService) { }
 
@@ -2038,13 +2039,14 @@ export class ChangementAgenceComponent implements OnInit {
   submitForm(data: any) {
     if(data.ville!=null && data.agence!=null && data.motif!=null && data.compte!=null){
       this.demandee={
+        sattus:"pending",
         motif:data.motif,
         ville:data.ville.ville,
         account:data.compte,
         agnceToTransfer:data.agence,
         type:"transfer",
       }
-      console.log(  this.demandee)
+     this.onSaveDemande(this.demandee);
 
 
 
@@ -2053,10 +2055,16 @@ export class ChangementAgenceComponent implements OnInit {
       this.validateForm.controls[i].markAsDirty();
       this.validateForm.controls[i].updateValueAndValidity();
     }
-    this.onSaveDemande(this.demandee)
   }
-  onSaveDemande(data:any){
-    this.demandeService.SaveDemande(this.demandee)
+  onSaveDemande(demande:DemandeModel){
+    this.demandeService.SaveDemande(demande).subscribe(data => {
+      this.saved=data;
+      this.validateForm.reset();
+      window.location.reload();
+      alert('succsess')
+    })
+
+
   }
 OnGetAllAgences(){
     this.loading = true;

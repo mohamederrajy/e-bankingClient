@@ -14,12 +14,26 @@ export class DemandeService {
   constructor(private http:HttpClient) { }
 
   GetDemande():Observable<DemandeModel[]>{
+    const jwt =localStorage.getItem('jwt')
+    console.log(jwt);
+    const headers= {
+      'Content-Type':  'application/json',
+      Authorization: 'Bearer '+jwt,
+
+    }
     let host=environment.host
-    return this.http.get<DemandeModel[]>(host+"Demande")
+    return this.http.get<DemandeModel[]>(host+"demande",{headers})
   }
   SaveDemande(demande:DemandeModel):Observable<DemandeModel>{
+    const jwt =localStorage.getItem('jwt')
+    console.log(jwt);
+    const headers= {
+      'Content-Type':  'application/json',
+      Authorization: 'Bearer '+jwt,
+
+    }
     let host=environment.host
-    return  this.http.post<DemandeModel>(host+"Demande",demande)
+    return  this.http.post<DemandeModel>(host+"demande",demande,{headers})
   }
   cancelDemande(){
     let host=environment.host
