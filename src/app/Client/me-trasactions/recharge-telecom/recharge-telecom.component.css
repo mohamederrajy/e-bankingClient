@@ -5,16 +5,18 @@
 
 input[type=radio]:checked + label>img {
   border: 1px solid #fff;
-  box-shadow: 0 0 3px 3px #090;
+  filter: none;
 }
 
 /* Stuff after this is only to make things more pretty */
 input[type=radio] + label>img {
   width: 120px;
+  margin-right: 54px;
+  margin-left: 15px;
   height: 120px;
+  filter: grayscale(1);
   transition: 500ms all;
   border-radius: 150px;
-  margin-right: 41px;
 }
 
 

@@ -11,6 +11,7 @@ import {NzButtonModule} from 'ng-zorro-antd/button';
 import {NzTableModule} from 'ng-zorro-antd/table';
 import {NzIconModule} from 'ng-zorro-antd/icon';
 import {MatIconModule} from '@angular/material/icon';
+import {NzSpinModule} from 'ng-zorro-antd/spin';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import {MatIconModule} from '@angular/material/icon';
         NzButtonModule,
         NzTableModule,
         NzIconModule,
-        MatIconModule
+        MatIconModule,
+        NzSpinModule
     ]
 })
 export class EffectuerDesVirementsModule { }

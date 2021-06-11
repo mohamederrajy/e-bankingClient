@@ -24,7 +24,7 @@
             <nz-form-item >
               <nz-form-label [nzSm]="5" [nzXs]="12" [nzSpan]="" nzFor="agenceac" >agence actuelle</nz-form-label>
               <nz-form-control [nzSpan]=""  nzErrorTip="">
-                <input type="text" nz-input formControlName="agenceac" placeholder="{{clinet.agence.ville}}"  [disabled]="true"/>
+                <input type="text" nz-input formControlName="agenceac" placeholder="{{agence.ville}}"  [disabled]="true"/>
               </nz-form-control>
             </nz-form-item>
           </div>
@@ -58,7 +58,7 @@
                 <nz-select
                   id="agence" formControlName="agence" nzPlaceHolder="Select agence"
                   nzAllowClear>
-                  <nz-option *ngFor="let ville of villes" [nzLabel]="ville.ville" [nzValue]="ville"></nz-option>
+                  <nz-option *ngFor="let agence of agences" [nzLabel]="agence.ville" [nzValue]="agence"></nz-option>
                 </nz-select>
               </nz-form-control>
             </nz-form-item>
@@ -84,7 +84,7 @@
               <nz-select
                 id="compte" formControlName="compte" nzPlaceHolder="Select compte"
                 nzAllowClear>
-                <nz-option *ngFor="let compt of clinet.Comptes" [nzLabel]="compt.num_compte" [nzValue]="compt"></nz-option>
+                <nz-option *ngFor="let compt of comptes" [nzLabel]="compt.num_compte" [nzValue]="compt"></nz-option>
               </nz-select>
             </nz-form-control>
           </nz-form-item>
@@ -105,12 +105,29 @@
   </div>
 </div>
 </div>
+
 <div class="row">
   <div class="col-md-12">
     <div class="card">
       <div class="card-header">
         <h4 class="card-title">Votre demande</h4>
-        <nz-table #basicTable [nzData]="{demande:demande}">
+        <ng-container *ngIf="(demandes$ | async) as result" [ngSwitch]="result.dataState">
+          <ng-container *ngSwitchCase="DataStateEnum.LOADING">
+            <div style="text-align: center">
+              <img src="assets/img/lp.gif" alt="...">
+            </div>
+          </ng-container>
+          <ng-container *ngSwitchCase="DataStateEnum.Error">
+            <div class="alert alert-danger alert-with-icon">
+              <i class="material-icons" data-notify="icon">error_outline</i>
+              <button aria-label="Close" class="close" data-dismiss="alert" mat-button type="button"><i class="material-icons">close</i>
+              </button>
+              <span data-notify="message">
+        <b>Error</b>{{result.errorMessage}}</span>
+            </div>
+          </ng-container>
+          <ng-container *ngSwitchCase="DataStateEnum.LOADED">
+        <nz-table #basicTable [nzData]="result.data">
           <thead>
           <tr>
             <th>Numéro de Compte</th>
@@ -121,12 +138,12 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let dem of demande  ">
-            <td>{{dem.compte.num_compte}}</td>
-            <td>{{dem.ville.ville}}</td>
-            <td>{{dem.agence.ville}}</td>
-            <td>{{dem.motif}}</td>
-            <td>  <button class="btn btn-danger">
+          <tr *ngFor="let dem of result.data  ">
+            <td>{{dem.account.num_compte}}</td>
+            <td>{{dem.ville}}</td>
+            <td>{{dem.agnceToTransfer}}</td>
+
+            <td>  <button class="btn btn-danger" (click)="Ocancel(dem)">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
                 <path d="M1.293 1.293a1 1 0 0 1 1.414 0L8 6.586l5.293-5.293a1 1 0 1 1 1.414 1.414L9.414 8l5.293 5.293a1 1 0 0 1-1.414 1.414L8 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L6.586 8 1.293 2.707a1 1 0 0 1 0-1.414z"/>
               </svg>
@@ -134,6 +151,8 @@
           </tr>
           </tbody>
         </nz-table>
+          </ng-container>
+        </ng-container>
       </div>
       <div class="card-body">
       </div>

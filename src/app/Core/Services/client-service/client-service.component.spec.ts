@@ -1,8 +1,8 @@
-import {AgenceModel} from './client-service.component';
+import {ClientService} from './client-service.component';
 
 
 describe('BeneficiaireModel', () => {
   it('should create an instance', () => {
-    expect(new AgenceModel()).toBeTruthy();
+    expect(new ClientService()).toBeTruthy();
   });
 });

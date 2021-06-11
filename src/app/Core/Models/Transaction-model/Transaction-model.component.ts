@@ -1,9 +1,11 @@
-import {ComptsModel} from '../Compts-model/Compts-model.component';
+import {CompteModel} from '../Compte-model/Compte-model.component';
+import {BeneficiaireModel} from '../beneficiaire-model/beneficiaire-model.component';
 export class TransactionModel {
   amount!:number;
   transactionType!:string;
   Libell!:string;
-  dateop: string ;
+  motif:string;
+  benificier:BeneficiaireModel;
 
 
 }

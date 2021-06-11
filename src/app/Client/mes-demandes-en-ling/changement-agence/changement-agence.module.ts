@@ -8,6 +8,7 @@ import {NzInputModule} from 'ng-zorro-antd/input';
 import {ReactiveFormsModule} from '@angular/forms';
 import {NzSelectModule} from 'ng-zorro-antd/select';
 import {NzTableModule} from 'ng-zorro-antd/table';
+import {NzSpinModule} from 'ng-zorro-antd/spin';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import {NzTableModule} from 'ng-zorro-antd/table';
         NzInputModule,
         ReactiveFormsModule,
         NzSelectModule,
-        NzTableModule
+        NzTableModule,
+        NzSpinModule
     ]
 })
 export class ChangementAgenceModule { }

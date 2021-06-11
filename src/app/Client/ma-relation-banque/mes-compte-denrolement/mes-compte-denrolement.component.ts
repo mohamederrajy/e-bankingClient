@@ -1,6 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import {ComptsModel} from '../../../Core/Models/Compts-model/Compts-model.component';
+import {CompteModel} from '../../../Core/Models/Compte-model/Compte-model.component';
 import {TransactionModel} from '../../../Core/Models/Transaction-model/Transaction-model.component';
+import {BeneficiaireModel} from '../../../Core/Models/beneficiaire-model/beneficiaire-model.component';
+import {AgenceModel} from '../../../Core/Models/Agence-model/Agence-model.component';
+import {ClientModel} from '../../../Core/Models/Client-model/Client-model.component';
+import {CompteService} from '../../../Core/Services/compte-service/compte-service.component';
+import {Observable, of} from 'rxjs';
+// @ts-ignore
+import {DashboradModel} from '../../../Core/Models/dashboard-model/dashboard-model.component';
+import {catchError, map, startWith} from 'rxjs/operators';
+import {AppDataState,DataStateEnum} from '../../../../state/client.state';
 
 @Component({
   selector: 'app-mes-compte-denrolement',
@@ -8,17 +17,20 @@ import {TransactionModel} from '../../../Core/Models/Transaction-model/Transacti
   styleUrls: ['./mes-compte-denrolement.component.css']
 })
 export class MesCompteDenrolementComponent implements OnInit {
+  comptes$: Observable<AppDataState<CompteModel[]>> | null=null;
+  DataStateEnum=DataStateEnum
+  public comptes: CompteModel [];
+  public transactionModel: TransactionModel[];
+  public transaction: TransactionModel;
+  public beneficiaires: BeneficiaireModel[];
+  public agence: AgenceModel;
 
-  public comptes:ComptsModel [];
-  public transactionModel:TransactionModel[];
-  public operastions:TransactionModel[];
 
-
-
-
-  constructor() { }
+  constructor(private compteService:CompteService) {
+  }
 
   expandSet = new Set<number>();
+
   onExpandChange(id: number, checked: boolean): void {
     if (checked) {
       this.expandSet.add(id);
@@ -26,50 +38,90 @@ export class MesCompteDenrolementComponent implements OnInit {
       this.expandSet.delete(id);
     }
   }
+
   ngOnInit(): void {
 
-     this.transactionModel=[
-       {
-         transactionType:"debit",
-          amount:1222,
-         dateop:"11/04/2021",
-         Libell:"Versement de  brahim dlkhraa"
-       },
-       {
-         transactionType:"credit",
-         amount:142,
-         dateop:"11/04/2021",
-         Libell:"Retrait  de  mohamed errajy"
+    this.OnGetcpmtes();
 
-       }
-     ]
-
-    this.comptes =[
+    this.beneficiaires = [
       {
-        id:1,
-        num_compte :34445678,
-        devis:"MAD",
-        intitule:"MOHAMED RAJY",
-        solde:10000,
-        operations:this.transactionModel
+        accountNum: 2451524,
+        firstname: "mohamed",
+        lastName: "raij",
+        tele: 45636362,
+        email: "mohedm@gmail.com"
+
+
+      },
+      {
+        accountNum: 2451524,
+        firstname: "mohamed",
+        lastName: "raij",
+        tele: 45636362,
+        email: "mohedm@gmail.com"
+
+
+      },
+
+    ]
+
+
+
+    this.transactionModel=  [
+      {
+        transactionType:"debit",
+        amount:1222,
+        motif:"transaction",
+        benificier:this.beneficiaires[0],
+        Libell:"Retrait  de  mohamed errajy"
 
 
 
       },
       {
-        id:2,
-        num_compte :4255436,
-        devis:"MAD",
-        intitule:"MOHAMED RAJY",
-        solde:20000,
-        operations:this.transactionModel
+        transactionType:"credit",
+        amount:1222,
+        motif:"testcd",
+        benificier:this.beneficiaires[1],
+        Libell:"Retrait  de  mohamed errajy"
+
+      }
+    ]
+
+    this.comptes = [
+      {
+        id: 1,
+        num_compte: 34445678,
+        devis: "MAD",
+        intitule: "MOHAMED RAJY",
+        solde: 10000,
+        transactions: this.transactionModel
 
 
+      },
+      {
+        id: 2,
+        num_compte: 4255436,
+        devis: "MAD",
+        intitule: "MOHAMED RAJY",
+        solde: 20000,
+        transactions: this.transactionModel
 
 
       },
     ]
 
-  }
 
+
+
+
+  }
+  OnGetcpmtes(){
+    this.comptes$=this.compteService.GetComptes().pipe(
+      map(data=>{
+        return ({dataState:DataStateEnum.LOADED,data:data})}),
+      startWith({dataState:DataStateEnum.LOADING}),
+      catchError(err=>of({dataState:DataStateEnum.Error,errorMessage:err.message}))
+    )
+  }
 }

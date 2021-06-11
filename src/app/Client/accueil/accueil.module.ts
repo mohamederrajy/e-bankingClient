@@ -7,18 +7,20 @@ import {NzFormModule} from 'ng-zorro-antd/form';
 import {NzSelectModule} from 'ng-zorro-antd/select';
 import {FormsModule} from '@angular/forms';
 import {NzTableModule} from 'ng-zorro-antd/table';
+import {NzSpinModule} from 'ng-zorro-antd/spin';
 
 
 @NgModule({
   declarations: [AccueilComponent],
-    imports: [
-        CommonModule,
-        AccueilRoutingModule,
-        NzFormModule,
-        NzSelectModule,
-        FormsModule,
-        NzTableModule,
+  imports: [
+    CommonModule,
+    AccueilRoutingModule,
+    NzFormModule,
+    NzSelectModule,
+    FormsModule,
+    NzTableModule,
+    NzSpinModule,
 
-    ]
+  ]
 })
 export class AccueilModule { }

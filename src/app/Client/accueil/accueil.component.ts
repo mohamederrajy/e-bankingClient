@@ -1,18 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import Chart from 'chart.js';
 import {DashboradModel} from '../../Core/Models/dashboard-model/dashboard-model.component';
-import {ComptsModel} from '../../Core/Models/Compts-model/Compts-model.component';
+import {CompteModel} from '../../Core/Models/Compte-model/Compte-model.component';
 import {TransactionModel} from '../../Core/Models/Transaction-model/Transaction-model.component';
+import {Observable, of} from 'rxjs';
+import {AppDataState, DataStateEnum} from '../../../state/client.state';
+import {DashboardService} from '../../Core/Services/dashboard-service/dashboard-service.component';
+import {catchError, map, startWith} from 'rxjs/operators';
 @Component({
   selector: 'app-accueil',
   templateUrl: './accueil.component.html',
   styleUrls: ['./accueil.component.css']
 })
 export class AccueilComponent implements OnInit {
+  dashborad$: Observable<AppDataState<DashboradModel[]>> | null=null;
+  DataStateEnum=DataStateEnum
+  constructor(private dashboardService:DashboardService) { }
   selectedValue = null;
   public dashboradModel:DashboradModel;
   public transactionModel:TransactionModel[];
-  public comptsModel:ComptsModel [];
+  public comptsModel:CompteModel [];
   public canvas : any;
   public ctx;
   public chartColor;
@@ -20,6 +27,8 @@ export class AccueilComponent implements OnInit {
   public chartHours;
 
   ngOnInit(){
+    this.ongetDashborad();
+
 
     this.comptsModel =[
       {
@@ -28,7 +37,7 @@ export class AccueilComponent implements OnInit {
         devis:"MAD",
         intitule:"MOHAMED ER-RAJY",
         solde:10000,
-      operations:  this.transactionModel
+        transactions:  this.transactionModel
 
 
       },
@@ -38,7 +47,7 @@ export class AccueilComponent implements OnInit {
         devis:"MAD",
         intitule:"MOHAMED ER-RAJY",
         solde:20000,
-        operations:  this.transactionModel
+        transactions:  this.transactionModel
 
 
 
@@ -246,6 +255,14 @@ export class AccueilComponent implements OnInit {
       options: chartOptions
     });
   }
+   ongetDashborad(){
+     this.dashborad$=this.dashboardService.GetDashboard().pipe(
+       map(data=>{
+         return ({dataState:DataStateEnum.LOADED,data:data})}),
+       startWith({dataState:DataStateEnum.LOADING}),
+       catchError(err=>of({dataState:DataStateEnum.Error,errorMessage:err.message}))
+     )
+   }
 
 }
 

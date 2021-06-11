@@ -1,3 +1,19 @@
+<ng-container *ngIf="(dashborad$ | async) as result" [ngSwitch]="result.dataState">
+  <ng-container *ngSwitchCase="DataStateEnum.LOADING">
+   <div style="text-align: center">
+     <img src="assets/img/lp.gif" alt="...">
+   </div>
+  </ng-container>
+  <ng-container *ngSwitchCase="DataStateEnum.Error">
+    <div class="alert alert-danger alert-with-icon">
+      <i class="material-icons" data-notify="icon">error_outline</i>
+      <button aria-label="Close" class="close" data-dismiss="alert" mat-button type="button"><i class="material-icons">close</i>
+      </button>
+      <span data-notify="message">
+        <b>Error</b>{{result.errorMessage}}</span>
+    </div>
+  </ng-container>
+  <ng-container *ngSwitchCase="DataStateEnum.LOADED">
 <div class="row">
   <div class="col-lg-3 col-md-6 col-sm-6">
     <div class="card card-stats">
@@ -11,7 +27,7 @@
           <div class="col-7 col-md-8">
             <div class="numbers">
               <p class="card-category">Crédit</p>
-              <p class="card-title">{{dashboradModel.credit}}
+              <p class="card-title">{{result.data[0].credit}}
               <p>
             </div>
           </div>
@@ -37,7 +53,7 @@
           <div class="col-7 col-md-8">
             <div class="numbers">
               <p class="card-category">Débit</p>
-              <p class="card-title">{{dashboradModel.debit}}
+              <p class="card-title">{{result.data[0].debit}}
               <p>
             </div>
           </div>
@@ -63,7 +79,7 @@
           <div class="col-7 col-md-8">
             <div class="numbers">
               <p class="card-category">Bloque</p>
-              <p class="card-title">{{dashboradModel.bloce}}
+              <p class="card-title">{{result.data[0].bloce}}
               <p>
             </div>
           </div>
@@ -89,7 +105,7 @@
           <div class="col-7 col-md-8">
             <div class="numbers">
               <p class="card-category">Echoué</p>
-              <p class="card-title">{{dashboradModel.echoues}}
+              <p class="card-title">{{result.data[0].echoues}}
               <p>
             </div>
           </div>
@@ -104,15 +120,6 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-md-12">
-      <div class="card">
-
-      </div>
-    </div>
-  </div>
-</div>
-
 <div class="row">
   <div class="col-md-12">
     <div class="card card-collapse">
@@ -120,7 +127,7 @@
         <h4 class="card-title">Mes Comptes</h4>
       </div>
       <div class="card-body">
-          <nz-table #basicTable [nzData]="{dashboradModel:dashboradModel}">
+          <nz-table #basicTable [nzData]="result.data[0].comptes">
             <thead>
             <tr>
               <th>Numéro de Compte</th>
@@ -129,7 +136,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let comtp of dashboradModel.comptes  ">
+            <tr *ngFor="let comtp of basicTable.data">
               <td>{{comtp.num_compte}}</td>
               <td>{{comtp.intitule}}</td>
               <td>{{comtp.solde}}</td>
@@ -140,3 +147,7 @@
       </div>
     </div>
   </div>
+</div>
+</ng-container>
+</ng-container>
+

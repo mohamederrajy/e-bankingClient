@@ -20,7 +20,7 @@ export const ROUTES: RouteInfo[] = [
       { path: '/Client/Ma_Relation_Banque/Mes_Compte_denrolement', id: 'Mes_Compte_denrolement', title: 'Mes enrolements', icon: 'nc-icon nc-single-02', class: 'ml-3 lead'},
     ]
   },
-  { path: '/Client/me-trasactions', id: 'Mes', title: 'Mes Transactions', icon: 'nc-pin-3', class: '' , subMenus:[
+  { path: '/Client/me-trasactions', id: 'Mes', title: 'Mes Transactions', icon: 'nc-credit-card', class: '' , subMenus:[
       { path: '/Client/me-trasactions/effectuer-des-virements', id: 'effectuer-des-virements', title: 'effectuer virements', icon: 'nc-icon nc-single-02', class: 'ml-3 lead'},
       { path: '/Client/me-trasactions/recharge-telecom', id: 'recharge-telecom', title: 'Recharge Telecom', icon: 'nc-icon nc-single-02', class: 'ml-3 lead'},
 

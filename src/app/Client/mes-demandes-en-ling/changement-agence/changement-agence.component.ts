@@ -1,10 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ClientModel} from '../../../Core/Models/Client-model/Client-model.component';
-import {ComptsModel} from '../../../Core/Models/Compts-model/Compts-model.component';
+import {CompteModel} from '../../../Core/Models/Compte-model/Compte-model.component';
 import {TransactionModel} from '../../../Core/Models/Transaction-model/Transaction-model.component';
 import {BeneficiaireModel} from '../../../Core/Models/beneficiaire-model/beneficiaire-model.component';
 import {AgenceModel} from '../../../Core/Models/Agence-model/Agence-model.component';
+import {DemandeService} from '../../../Core/Services/demande-service/demande-service.component';
+import {DemandeModel} from '../../../Core/Models/Demande-model/Compte-model.component';
+import {Observable, of} from 'rxjs';
+import {AppDataState,DataStateEnum} from '../../../../state/client.state';
+import {DashboradModel} from '../../../Core/Models/dashboard-model/dashboard-model.component';
+import {catchError, map, startWith} from 'rxjs/operators';
+import {AgenceService} from '../../../Core/Services/agence-service/beneficiare-service.component';
+import {CompteService} from '../../../Core/Services/compte-service/compte-service.component';
 @Component({
   selector: 'app-changement-agence',
   templateUrl: './changement-agence.component.html',
@@ -12,13 +20,19 @@ import {AgenceModel} from '../../../Core/Models/Agence-model/Agence-model.compon
 })
 export class ChangementAgenceComponent implements OnInit {
   validateForm!: FormGroup;
+  demandes$: Observable<AppDataState<DemandeModel[]>> | null=null;
+  DataStateEnum=DataStateEnum
   public clinet:ClientModel;
-  public comptes:ComptsModel [];
+  public comptes:CompteModel [];
   public transactionModel:TransactionModel[];
   public beneficiaires:BeneficiaireModel[];
   public beneficiaire:BeneficiaireModel;
+  public demandee:DemandeModel;
   public agence:AgenceModel
+  public agences:AgenceModel[];
   public demande=[]
+  loading: boolean = false;
+  errorMessage;
   public villes:any=[
     {
       "id": "0",
@@ -1987,9 +2001,14 @@ export class ChangementAgenceComponent implements OnInit {
     }
   ];
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private compteService:CompteService ,private agenceService:AgenceService,private formBuilder: FormBuilder,private demandeService:DemandeService) { }
 
   ngOnInit(): void {
+
+    this.OnGetAccount();
+    this.OnGetAllAgences();
+    this.OnGetAgences();
+    this.OnGetDem();
     this.validateForm = this.formBuilder.group({
       ville: [null, [Validators.required]],
       agence:[null, [Validators.required]],
@@ -1998,7 +2017,10 @@ export class ChangementAgenceComponent implements OnInit {
     });
 
     this.agence={
-      ville:"agadir"
+      ville:"agadir",
+      tele:"267890°",
+      name:"effgld",
+      adress:"edfjkgf",
 
     }
     this.beneficiaires=[
@@ -2018,42 +2040,22 @@ export class ChangementAgenceComponent implements OnInit {
       {
         transactionType:"debit ",
         amount:1222,
-        dateop:"11/04/2021",
-        Libell:"Versement de  mohamed errajy"
+        motif:"etst",
+        benificier:this.beneficiaires[0],
+        Libell:"Retrait  de  mohamed errajy"
       },
       {
         transactionType:"credit ",
         amount:1222,
-        dateop:"11/04/2021",
+      motif:"etst",
+        benificier:this.beneficiaires[0],
         Libell:"Retrait  de  mohamed errajy"
 
       }
     ]
 
     this.comptes =[
-      {
-        id:1,
-        num_compte :34445678,
-        devis:"MAD",
-        intitule:"MOHAMED RAJY",
-        solde:10000,
-        operations:this.transactionModel
 
-
-
-      },
-      {
-        id:2,
-        num_compte :4255436,
-        devis:"MAD",
-        intitule:"MOHAMED RAJY",
-        solde:20000,
-        operations:this.transactionModel
-
-
-
-
-      },
     ]
     this.clinet={
       nom:"rajy",
@@ -2071,13 +2073,100 @@ export class ChangementAgenceComponent implements OnInit {
 
   submitForm(data: any) {
     if(data.ville!=null && data.agence!=null && data.motif!=null && data.compte!=null){
-      console.log(data)
-      this.demande.push(data);
+      this.demandee={
+        motif:data.motif,
+        ville:data.ville.ville,
+        account:data.compte,
+        agnceToTransfer:data.agence,
+        type:"transfer",
+      }
+      console.log(  this.demandee)
+
+
 
     }
     for (const i in this.validateForm.controls) {
       this.validateForm.controls[i].markAsDirty();
       this.validateForm.controls[i].updateValueAndValidity();
     }
+    this.onSaveDemande(this.demandee)
+  }
+  onSaveDemande(data:any){
+    this.demandeService.SaveDemande(this.demandee)
+  }
+OnGetAllAgences(){
+    this.loading = true;
+    this.errorMessage = "";
+    this.agenceService.GetAllAgences()
+      .subscribe(
+        (response) => {                           //next() callback
+          console.log('response received')
+          this.agences = response;
+        },
+        (error) => {                              //error() callback
+          console.error('Request failed with error')
+          this.errorMessage = error;
+          this.loading = false;
+        },
+        () => {                                   //complete() callback
+          console.error('Request completed')      //This is actually not needed
+          this.loading = false;
+        })
+
+
+
+  }
+  OnGetAgences(){
+    this.loading = true;
+    this.errorMessage = "";
+    this.agenceService.GetClientAgence()
+      .subscribe(
+        (response) => {                           //next() callback
+          console.log('response received')
+          this.agence = response;
+        },
+        (error) => {                              //error() callback
+          console.error('Request failed with error')
+          this.errorMessage = error;
+          this.loading = false;
+        },
+        () => {                                   //complete() callback
+          console.error('Request completed')      //This is actually not needed
+          this.loading = false;
+        })
+
+
+
+  }
+  OnGetAccount(){
+    this.loading = true;
+    this.errorMessage = "";
+    this.compteService.GetComptes()
+      .subscribe(
+        (response) => {                           //next() callback
+          console.log('response received')
+          this.comptes = response;
+        },
+        (error) => {                              //error() callback
+          console.error('Request failed with error')
+          this.errorMessage = error;
+          this.loading = false;
+        },
+        () => {                                   //complete() callback
+          console.error('Request completed')      //This is actually not needed
+          this.loading = false;
+        })
+
+  }
+  OnGetDem(){
+    this.demandes$=this.demandeService.GetDemande().pipe(
+      map(data=>{
+        return ({dataState:DataStateEnum.LOADED,data:data})}),
+      startWith({dataState:DataStateEnum.LOADING}),
+      catchError(err=>of({dataState:DataStateEnum.Error,errorMessage:err.message}))
+    )
+  }
+  Ocancel(dem: DemandeModel) {
+    this.demandeService.cancelDemande();
   }
 }
