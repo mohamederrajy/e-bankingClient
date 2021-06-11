@@ -1,0 +1,96 @@
+.cc-selector input{
+    margin:0;padding:0;
+    -webkit-appearance:none;
+       -moz-appearance:none;
+            appearance:none;
+}
+.visa{background-image:url(http://www.iam.ma/ImagesMarocTelecom/Phototh%C3%A8que/Images-originales/maroc-telecom-logo-3267-4-originale.jpg  );}
+.mastercard{background-image:url(https://www.dreamjob.ma/wp-content/uploads/2020/08/inwi-Emploi-Recrutement-3-750x375.png);}
+.meditel{background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Orange_logo.svg/1200px-Orange_logo.svg.png)}
+
+.cc-selector input:active +.drinkcard-cc{opacity: .9;}
+.cc-selector input:checked +.drinkcard-cc{
+    -webkit-filter: none;
+       -moz-filter: none;
+            filter: none;
+}
+.drinkcard-cc{
+    cursor:pointer;
+    background-size:contain;
+    background-repeat:no-repeat;
+    display:inline-block;
+    margin-right: 50px;
+    width:200px;height:150px;
+    -webkit-transition: all 100ms ease-in;
+       -moz-transition: all 100ms ease-in;
+            transition: all 100ms ease-in;
+      /*-webkit-filter: brightness(1.8) grayscale(3) opacity(.9);
+         -moz-filter: brightness(1.8) grayscale(3) opacity(.9);
+              filter: brightness(1.8) grayscale(3) opacity(.9);*/
+}
+.drinkcard-cc:hover{
+    -webkit-filter: brightness(1.2) grayscale(.5) opacity(.9);
+       -moz-filter: brightness(1.2) grayscale(.5) opacity(.9);
+            filter: brightness(1.2) grayscale(.5) opacity(.9);
+}
+
+.input-hidden {
+  position: absolute;
+  left: -9999px;
+}
+
+input[type=radio]:checked + label>img {
+  border: 1px solid #fff;
+  filter: none;
+}
+
+/* Stuff after this is only to make things more pretty */
+input[type=radio] + label>img {
+  width: 120px;
+  margin-right: 54px;
+  margin-left: 15px;
+  height: 120px;
+  filter: grayscale(1);
+  transition: 500ms all;
+  border-radius: 150px;
+}
+
+
+/*
+ | //lea.verou.me/css3patterns
+ | Because white bgs are boring.
+*/
+html {
+  background-color: #fff;
+  background-size: 100% 1.2em;
+  background-image:
+    linear-gradient(
+      90deg,
+      transparent 79px,
+      #abced4 79px,
+      #abced4 81px,
+      transparent 81px
+    ),
+    linear-gradient(
+      #eee .1em,
+      transparent .1em
+    );
+}
+
+.creances
+{
+    margin-top: 5px;
+    color: #F15D22;
+
+}
+
+#operateurList
+{
+  margin: 40px;
+}
+
+
+/* Extras */
+a:visited{color:#888}
+a{color:#444;text-decoration:none;}
+p{margin-bottom:.3em;}

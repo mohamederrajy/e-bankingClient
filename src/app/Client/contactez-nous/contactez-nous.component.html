@@ -1,1 +1,190 @@
-<p>contactez-nous works!</p>
+<div class="card">
+  <div class="card-header">
+    <div nz-row>
+      <div nz-col [nzSpan]="18" [nzPush]="6">
+        <img
+          nz-image
+          width="600px"
+          height="300px"
+          nzSrc="https://www.cihbank.ma/sites/all/themes/cih/images/banner-din-contactez-nous.jpg"
+          alt=""
+        />
+      </div>
+      <div nz-col [nzSpan]="6" [nzPull]="18">
+
+        <H4 style="margin-top: 125px;">Contactez nous</H4>
+      </div>
+    </div>
+
+    <h5 class="card-title">Demande de Renseignement</h5>
+  </div>
+
+  <div class="card-body">
+
+        <form  nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+          <div nz-row >
+            <div nz-col nzSpan="24" class="Qrow">
+              <nz-form-item >
+                <nz-form-label [nzSm]="6" [nzXs]="12" [nzSpan]="" nzFor="Client" nzRequired>Client SAMATI BANK </nz-form-label>
+                <nz-form-control [nzSpan]="" nzErrorTip="Please select your Compte!">
+                  <nz-select
+                    id="Client"  nzPlaceHolder="Sélectionnez"
+                    nzAllowClear>
+                    <nz-option nzLabel="oui" nzValue="oui"></nz-option>
+                    <nz-option nzLabel="non" nzValue="non"></nz-option>
+                  </nz-select>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+
+          <div nz-row >
+            <div nz-col nzSpan="24" class="Qrow">
+              <nz-form-item >
+                <nz-form-label [nzSm]="6" [nzXs]="12" [nzSpan]="" nzFor="Tel" nzRequired>Nom</nz-form-label>
+                <nz-form-control [nzSpan]="" nzErrorTip="Please enter your last name">
+                  <input type="text" nz-input  placeholder="Nom" />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+          <div nz-row >
+            <div nz-col nzSpan="24" class="Qrow">
+              <nz-form-item >
+                <nz-form-label [nzSm]="6" [nzXs]="12" [nzSpan]="" nzFor="Prenom" nzRequired>Prénom</nz-form-label>
+                <nz-form-control [nzSpan]="" nzErrorTip="Please enter your last name">
+                  <input id="Prenom" type="text" nz-input  placeholder="Prenom" />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+
+          <div nz-row >
+            <div nz-col nzSpan="24" class="Qrow">
+              <nz-form-item >
+                <nz-form-label [nzSm]="6" [nzXs]="12" [nzSpan]="" nzFor="Client" nzRequired>Type d'identification</nz-form-label>
+                <nz-form-control [nzSpan]="" nzErrorTip="Please select Identification way">
+                  <nz-select
+                    id=""  nzPlaceHolder="Sélectionnez"
+                    nzAllowClear>
+                    <nz-option nzLabel="CIN" nzValue="n1"></nz-option>
+                    <nz-option nzLabel="Passeport" nzValue="n2"></nz-option>
+                    <nz-option nzLabel="Carte de Séjour" nzValue="n3"></nz-option>
+                  </nz-select>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+
+          <div nz-row >
+            <div nz-col nzSpan="24" class="Qrow">
+              <nz-form-item >
+                <nz-form-label [nzSm]="6" [nzXs]="12" [nzSpan]="" nzFor="Identification" nzRequired>Numéro d'identification</nz-form-label>
+                <nz-form-control [nzSpan]="" nzErrorTip="Please enter a vaalid identification number">
+                  <input id="Identification" type="text" nz-input  placeholder="Identification Number" />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+
+          <div nz-row >
+            <div nz-col nzSpan="24" class="Qrow">
+              <nz-form-item >
+                <nz-form-label [nzSm]="6" [nzXs]="12" [nzSpan]="" nzFor="Reponse" nzRequired>Recevoir une réponse par </nz-form-label>
+                <nz-form-control [nzSpan]="" nzErrorTip="Please select Identification way">
+                  <nz-select
+                    id="Reponse"  nzPlaceHolder="Sélectionnez"
+                    nzAllowClear>
+                    <nz-option nzLabel="Courier" nzValue="n1"></nz-option>
+                    <nz-option nzLabel="Fax" nzValue="n2"></nz-option>
+                    <nz-option nzLabel="E-mail" nzValue="n3"></nz-option>
+                  </nz-select>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+
+
+          <div nz-row >
+            <div nz-col nzSpan="24" class="Qrow">
+              <nz-form-item >
+                <nz-form-label [nzSm]="6" [nzXs]="12" [nzSpan]="" nzFor="Objet" nzRequired>Objet</nz-form-label>
+                <nz-form-control [nzSpan]="" nzErrorTip="Please enter ur object">
+                  <input id="Objet" type="text" nz-input  placeholder="Objet" />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+
+          <div nz-row >
+            <div nz-col nzSpan="24" class="Qrow">
+              <nz-form-item >
+                <nz-form-label [nzSm]="6" [nzXs]="12" [nzSpan]="" nzFor="Tel" nzRequired>Télephone</nz-form-label>
+                <nz-form-control [nzSpan]="" nzErrorTip="Please enter ur telephone">
+                  <input id="Tel" type="text" nz-input  placeholder="Téléphone" />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+
+          <div nz-row >
+            <div nz-col nzSpan="24" class="Qrow">
+              <nz-form-item >
+                <nz-form-label [nzSm]="6" [nzXs]="12" [nzSpan]="" nzFor="email" nzRequired>Email</nz-form-label>
+                <nz-form-control [nzSpan]="" nzErrorTip="Please enter ur email">
+                  <input id="email" type="text" nz-input  placeholder="Email" />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+
+          <div nz-row >
+            <div nz-col nzSpan="24" class="Qrow">
+              <nz-form-item >
+                <nz-form-label [nzSm]="6" [nzXs]="12" [nzSpan]="" nzFor="fax" nzRequired>Fax</nz-form-label>
+                <nz-form-control [nzSpan]="" nzErrorTip="Please enter ur fax">
+                  <input id="fax" type="text" nz-input  placeholder="Fax" />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+
+          <div nz-row >
+            <div nz-col nzSpan="24" class="Qrow">
+              <nz-form-item >
+                <nz-form-label [nzSm]="6" [nzXs]="12" [nzSpan]="" nzFor="codePoostal" nzRequired>Code Postal</nz-form-label>
+                <nz-form-control [nzSpan]="" nzErrorTip="Please enter ur postal code">
+                  <input id="codePoostal" type="text" nz-input  placeholder="Code Postal" />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+
+          <div nz-row >
+            <div nz-col nzSpan="24" class="Qrow">
+              <nz-form-item >
+                <nz-form-label [nzSm]="6" [nzXs]="12" [nzSpan]="" nzFor="adress" nzRequired>Adresse</nz-form-label>
+                <nz-form-control [nzSpan]="" nzErrorTip="Please enter ur address">
+                  <input id="address" type="text" nz-input  placeholder="address" />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+
+          <div nz-row >
+            <div nz-col nzSpan="7" class="Qrow">
+              <p style="color: #ED362C">* indique un champ obligatoir</p>
+
+            </div>
+            <div nz-col nzSpan="17" class="Qrow">
+
+              <button style="width: 100%;" class="btn btn-success" type="submit" >Valide</button>
+
+
+            </div>
+          </div>
+
+
+        </form>
+  </div>
+</div>
