@@ -16,7 +16,7 @@
                 <nz-select
                   id="Compte" formControlName="Comptes" nzPlaceHolder="Select Compte"
                   nzAllowClear>
-                  <nz-option *ngFor="let compte of comptes" [nzLabel]="compte.num_compte" [nzValue]="compte"></nz-option>
+                  <nz-option *ngFor="let compte of comptes" [nzLabel]="compte.accountNum" [nzValue]="compte"></nz-option>
                 </nz-select>
               </nz-form-control>
             </nz-form-item>

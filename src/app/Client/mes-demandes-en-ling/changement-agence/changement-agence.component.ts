@@ -2038,16 +2038,18 @@ export class ChangementAgenceComponent implements OnInit {
 
     this.transactionModel=[
       {
+        cretaedAt: "11/11/2021",
         transactionType:"debit ",
         amount:1222,
-        motif:"etst",
+      description:"hdeuf",
         benificier:this.beneficiaires[0],
         Libell:"Retrait  de  mohamed errajy"
       },
       {
+        cretaedAt: "11/11/2021",
         transactionType:"credit ",
         amount:1222,
-      motif:"etst",
+       description:"tzedzed",
         benificier:this.beneficiaires[0],
         Libell:"Retrait  de  mohamed errajy"
 
@@ -2057,18 +2059,7 @@ export class ChangementAgenceComponent implements OnInit {
     this.comptes =[
 
     ]
-    this.clinet={
-      nom:"rajy",
-      pernom:"mohamed",
-      address:" agadir",
-      email:"mohamed@gmail.com",
-      sex:"M",
-      phone:38998989443,
-      Comptes :this.comptes,
-      Beneficiaires:this.beneficiaires,
-      agence: this.agence
 
-    }
   }
 
   submitForm(data: any) {

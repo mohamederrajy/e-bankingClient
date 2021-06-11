@@ -13,7 +13,7 @@ import {catchError, map, startWith} from 'rxjs/operators';
   styleUrls: ['./accueil.component.css']
 })
 export class AccueilComponent implements OnInit {
-  dashborad$: Observable<AppDataState<DashboradModel[]>> | null=null;
+  dashborad$: Observable<AppDataState<DashboradModel>> | null=null;
   DataStateEnum=DataStateEnum
   constructor(private dashboardService:DashboardService) { }
   selectedValue = null;
@@ -30,39 +30,7 @@ export class AccueilComponent implements OnInit {
     this.ongetDashborad();
 
 
-    this.comptsModel =[
-      {
-         id:1,
-        num_compte :34445678,
-        devis:"MAD",
-        intitule:"MOHAMED ER-RAJY",
-        solde:10000,
-        transactions:  this.transactionModel
 
-
-      },
-      {
-        id:2,
-        num_compte :4255436,
-        devis:"MAD",
-        intitule:"MOHAMED ER-RAJY",
-        solde:20000,
-        transactions:  this.transactionModel
-
-
-
-      },
-    ]
-
-
-    this.dashboradModel={
-      credit:1222,
-      bloce:122,
-      debit:120,
-      echoues:12,
-      comptes:this.comptsModel,
-
-    }
 
 
     this.chartColor = "#FFFFFF";

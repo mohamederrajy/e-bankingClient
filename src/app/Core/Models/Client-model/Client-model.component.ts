@@ -3,15 +3,13 @@ import {BeneficiaireModel} from '../beneficiaire-model/beneficiaire-model.compon
 import {AgenceModel} from '../Agence-model/Agence-model.component';
 
 export class ClientModel {
-  nom !:string;
-  pernom !:string;
+  firstname !:string;
+  lastname !:string;
   email!:string;
-  phone!: number;
-  address!:string;
-  sex!:string;
-  Comptes: CompteModel[];
-  Beneficiaires:BeneficiaireModel[];
-  agence:AgenceModel
+  username!: number;
+  tele!:string;
+  cin!:string;
+
 
 
 

@@ -51,17 +51,15 @@ export class EffectuerDesVirementsComponent implements OnInit {
     }
  // @ts-ignore
     // @ts-ignore
-    this.beneficiaires=[
 
-
- ]
 
 
     this.transactionModel=[
       {
+        cretaedAt: "11/11/2021",
         transactionType:"debit",
         amount:1222,
-       motif:"transaction",
+        description:"sdh",
         benificier:this.beneficiaire,
         Libell:"Retrait  de  mohamed errajy"
 
@@ -69,9 +67,10 @@ export class EffectuerDesVirementsComponent implements OnInit {
 
       },
       {
+        cretaedAt: "11/11/2021",
         transactionType:"credit ",
         amount:1222,
-        motif:"testcd",
+description:"dnjfnc",
         benificier:this.beneficiaire,
         Libell:"Retrait  de  mohamed errajy"
 
@@ -81,18 +80,7 @@ export class EffectuerDesVirementsComponent implements OnInit {
     this.comptes =[
 
     ]
-    this.clinet={
-      nom:"rajy",
-      pernom:"mohamed",
-      address:" agadir",
-      email:"mohamed@gmail.com",
-      sex:"M",
-      phone:38998989443,
-      Comptes :this.comptes,
-      Beneficiaires:this.beneficiaires,
-      agence: this.agence
 
-    }
     this.validateForm = this.formBuilder.group({
       Comptes: [null, [Validators.required]],
       Beneficiaire: [null, [Validators.required]],
@@ -117,8 +105,9 @@ export class EffectuerDesVirementsComponent implements OnInit {
   submitForm(value: any) {
   if(value.Comptes!=null && value.Beneficiaire!=null && value.montant && value.motif!=null){
     this.transaction={
+      cretaedAt: "11/11/2021",
       benificier:value.Beneficiaire,
-      motif:value.motif,
+     description:"test",
       amount:value.amount,
       transactionType:"debit",
       Libell:"Retrait de montant"+value.amount+"vers"+value.Beneficiaire.firstname,
@@ -171,7 +160,7 @@ export class EffectuerDesVirementsComponent implements OnInit {
         firstname:data.firstname
       }
    console.log(data)
-      this.beneficiareService.SaveBeneficiare(this.beneficiaire ,2);
+      this.beneficiareService.SaveBeneficiare(this.beneficiaire);
 
     }
 

@@ -4,7 +4,8 @@ export class TransactionModel {
   amount!:number;
   transactionType!:string;
   Libell!:string;
-  motif:string;
+  description:string;
+  cretaedAt:string;
   benificier:BeneficiaireModel;
 
 

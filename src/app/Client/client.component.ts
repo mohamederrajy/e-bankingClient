@@ -10,6 +10,8 @@ export class ClientComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    const jwt =localStorage.getItem('jwt')
+
   }
 
 }

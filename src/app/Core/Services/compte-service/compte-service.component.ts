@@ -13,8 +13,13 @@ export class CompteService {
   constructor(private http:HttpClient) { }
 
   GetComptes():Observable<CompteModel[]>{
+    const headers= {
+      'Content-Type':  'application/json',
+      Authorization: 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzYW1hdGlAZ21haWwuY29tIiwiaWF0IjoxNjIzNDA4MDEwLCJleHAiOjE2MjM0OTQ0MTB9.ExwD3UU7GS82rXVZq9abnb8Xi5cbXpEvVSt2lawR90x0X6q3vbetQbNz3CzQt-622Az3U7dT1zP-eqfJaAjZQA',
+
+    }
     let host=environment.host
-    return this.http.get<CompteModel[]>(host+"comptes")
+    return this.http.get<CompteModel[]>(host+"account/me",{headers})
   }
 
 
