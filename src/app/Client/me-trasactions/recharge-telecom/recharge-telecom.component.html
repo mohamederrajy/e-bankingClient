@@ -1,56 +1,200 @@
 
-<div class="row">
-  <div class="col-md-12">
-    <div class="card card-collapse">
-      <div class="card-header">
-        <h4 class="card-title">Mes Comptes</h4>
-      </div>
-      <div class="card-body">
-        <input
-          type="radio" name="emotion"
-          id="sad" class="input-hidden"   value="{{itemsList[1].value}}" (change)="onItemChange(itemsList[1])">
-        <label for="sad">
-          <img
-            src="http://www.iam.ma/ImagesMarocTelecom/Photothèque/Images-grandes/maroc-telecom-bleu-fr-grande.jpg"
-            alt="I'm sad" />
-        </label>
-
-        <input
-          value="{{itemsList[0].value}}" (change)="onItemChange(itemsList[0])"
-          type="radio" name="emotion"
-          id="happy" class="input-hidden" />
-        <label for="happy">
-          <img
-            src="https://inwi.ma/assets/logo-seo.jpg"
-            alt="I'm happy" />
-        </label><input
-        type="radio" name="emotion"
-        id="d" class="input-hidden" />
-        <label for="d">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Orange_logo.svg/766px-Orange_logo.svg.png"
-            alt="I'm sad" />
-        </label>
-
-        <input
-          type="radio" name="emotion"
-          id="v" class="input-hidden" />
-        <label for="v">
-          <img
-            src="https://1.bp.blogspot.com/-89KpZslJVQY/XmKzgM5cE9I/AAAAAAAAGy0/N9uS4ENK3XEyqUhpL7c6auwEMY8bv2o3wCLcBGAsYHQ/s1600/ggggggg.png"
-            alt="I'm happy" />
-        </label>
-        <input
-          type="radio" name="emotion"
-          id="b" class="input-hidden" />
-        <label for="b">
-          <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTU8WfxHc6vR3P6vXQdsbz3Cbvi8uUXot_TyA&usqp=CAU"
-            alt="I'm happy" />
-        </label>
-
-
-      </div>
-    </div>
+<div class="card">
+  <div class="card-header">
+    <h5 class="card-title">Recharge Telecom</h5>
   </div>
+  <div class="card-body">
+
+
+
+    <nz-tabset style="color: #F15D22;">
+      <nz-tab  nzTitle="Recharge Mobile / Internet">
+
+        <h6 class="creances">Liste des créances</h6>
+        <form  nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+          <!--<div class="cc-selector">
+          <input id="visa" type="radio" name="credit-card" value="telecom" />
+          <label class="drinkcard-cc visa" for="visa">Maroc Telecom</label>
+          <input id="mastercard" type="radio" name="credit-card" value="inwi" />
+          <label class="drinkcard-cc mastercard"for="mastercard">Inwi</label>
+          <input id="meditel" type="radio" name="meditel" value="meditel" />
+          <label class="drinkcard-cc meditel"for="meditel">Meditel</label>
+        </div>-->
+
+          <div class="row" id="operateurList">
+            <div class="col-md-12">
+
+
+                  <input
+                    type="radio" name="emotion"
+                    id="sad" class="input-hidden"   value="{{itemsList[1].value}}" (change)="onItemChange(itemsList[1])">
+                  <label for="sad">
+                    <img
+                      src="http://www.iam.ma/ImagesMarocTelecom/Photothèque/Images-grandes/maroc-telecom-bleu-fr-grande.jpg"
+                      alt="I'm sad" />
+                  </label>
+
+                  <input
+                    value="{{itemsList[0].value}}" (change)="onItemChange(itemsList[0])"
+                    type="radio" name="emotion"
+                    id="happy" class="input-hidden" />
+                  <label for="happy">
+                    <img
+                      src="https://inwi.ma/assets/logo-seo.jpg"
+                      alt="I'm happy" />
+                  </label><input
+                  type="radio" name="emotion"
+                  id="d" class="input-hidden" />
+                  <label for="d">
+                    <img
+                      src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Orange_logo.svg/766px-Orange_logo.svg.png"
+                      alt="I'm sad" />
+                  </label>
+
+                  <input
+                    type="radio" name="emotion"
+                    id="v" class="input-hidden" />
+                  <label for="v">
+                    <img
+                      src="https://1.bp.blogspot.com/-89KpZslJVQY/XmKzgM5cE9I/AAAAAAAAGy0/N9uS4ENK3XEyqUhpL7c6auwEMY8bv2o3wCLcBGAsYHQ/s1600/ggggggg.png"
+                      alt="I'm happy" />
+                  </label>
+
+
+
+
+
+            </div>
+          </div>
+
+          <div nz-row >
+            <div nz-col nzSpan="24" class="Qrow">
+          <nz-form-item >
+            <nz-form-label [nzSm]="6" [nzXs]="12" [nzSpan]="" nzFor="Compte" nzRequired>Compte à Débiter </nz-form-label>
+            <nz-form-control [nzSpan]="" nzErrorTip="Please select your Compte!">
+              <nz-select
+                id="Compte"  nzPlaceHolder="Select Account"
+                nzAllowClear>
+                <nz-option nzLabel="+8" nzValue="+86"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+            </div>
+          </div>
+
+          <div nz-row >
+            <div nz-col nzSpan="24" class="Qrow">
+              <nz-form-item >
+                <nz-form-label [nzSm]="6" [nzXs]="12" [nzSpan]="" nzFor="Tel" nzRequired>Numéro de Téléphone</nz-form-label>
+                <nz-form-control [nzSpan]="" nzErrorTip="Please select your Compte!">
+                  <input type="text" nz-input  placeholder="Telephone" />
+
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+
+          <div nz-row >
+            <div nz-col nzSpan="24" class="Qrow">
+              <nz-form-item >
+                <nz-form-label [nzSm]="6" [nzXs]="12" [nzSpan]="" nzFor="Offre" nzRequired>Offre </nz-form-label>
+                <nz-form-control [nzSpan]="" nzErrorTip="Please select your Compte!">
+                  <nz-select
+                    id="Offre"  nzPlaceHolder="Select Offre"
+                    nzAllowClear>
+                    <nz-option nzLabel="*2" nzValue="+86"></nz-option>
+                    <nz-option nzLabel="*3" nzValue="+86"></nz-option>
+                    <nz-option nzLabel="*6" nzValue="+86"></nz-option>
+                  </nz-select>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+
+          <div nz-row >
+            <div nz-col nzSpan="24" class="Qrow">
+              <nz-form-item >
+                <nz-form-label [nzSm]="6" [nzXs]="12" [nzSpan]="" nzFor="Compte" nzRequired>Montant </nz-form-label>
+                <nz-form-control [nzSpan]="" nzErrorTip="Please Enter an Amount">
+                  <input type="text" nz-input  placeholder="Montant" />
+
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+
+          <div nz-row >
+            <div nz-col nzSpan="7" class="Qrow">
+              <p style="color: #ED362C">* indique un champ obligatoir</p>
+
+            </div>
+            <div nz-col nzSpan="17" class="Qrow">
+
+              <button style="width: 100%;" class="btn btn-success" type="submit" >Valide</button>
+
+
+            </div>
+          </div>
+
+
+
+
+
+
+
+
+
+          <!--<nz-form-item>
+            <nz-form-label [nzSpan]="6" nzFor="email">Numéro de Téléphone (*)</nz-form-label>
+            <nz-form-control [nzSpan]="14">
+              <input nz-input name="tel" type="text" id="tel">
+            </nz-form-control>
+          </nz-form-item >
+
+          <nz-form-item>
+            <nz-form-label [nzSpan]="6" nzFor="email">Montant (*)</nz-form-label>
+            <nz-form-control [nzSpan]="28">
+              <input nz-input name="montant" type="montant" id="montant">
+            </nz-form-control>
+          </nz-form-item >-->
+
+
+        </form>
+      </nz-tab>
+
+
+      <nz-tab nzTitle="Mes Favoris">
+        Mes Favoris
+      </nz-tab>
+      <nz-tab nzTitle="Historique des Recherches">
+        Historique des Recherches
+      </nz-tab>
+    </nz-tabset>
+
+
+
+  </div>
+
+
 </div>
+
+    <!--<nz-tabset>
+      <nz-tab nzTitle="Recharge Mobile / Internet">
+          <div class="cc-selector">
+            <input id="visa" type="radio" name="credit-card" value="telecom" />
+            <label class="drinkcard-cc visa" for="visa">Maroc Telecom</label>
+            <input id="mastercard" type="radio" name="credit-card" value="inwi" />
+            <label class="drinkcard-cc mastercard"for="mastercard">Inwi</label>
+            <input id="meditel" type="radio" name="meditel" value="meditel" />
+            <label class="drinkcard-cc meditel"for="meditel">Meditel</label>
+
+          </div>
+      </nz-tab>
+      <nz-tab nzTitle="Mes Favoris">
+         Mes Favoris
+      </nz-tab>
+      <nz-tab nzTitle="Historique des Recherches">
+        Historique des Recherches
+      </nz-tab>
+    </nz-tabset>-->
+

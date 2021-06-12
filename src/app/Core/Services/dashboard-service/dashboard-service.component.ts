@@ -11,9 +11,18 @@ export class DashboardService {
 
   constructor(private http:HttpClient) { }
 
-  GetDashboard():Observable<DashboradModel[]>{
+
+
+  GetDashboard():Observable<DashboradModel>{
     let host=environment.host
-    return this.http.get<DashboradModel[]>(host+"dashborad")
+    const jwt =localStorage.getItem('jwt')
+    console.log(jwt);
+    const headers= {
+      'Content-Type':  'application/json',
+      Authorization: 'Bearer '+jwt,
+
+    }
+    return this.http.get<DashboradModel>(host+"client/dashboard",{headers})
   }
 
 }

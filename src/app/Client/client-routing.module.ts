@@ -12,6 +12,7 @@ const routes: Routes = [
     component: ClientComponent,
     children: [
       {
+
         path: '',
         loadChildren: () => import('../Client/accueil/accueil.module').then(m => m.AccueilModule) ,
       },

@@ -11,17 +11,39 @@ import {CompteModel} from '../../Models/Compte-model/Compte-model.component';
 export class BeneficiareService {
   constructor(private http:HttpClient) { }
 
-  SaveBeneficiare(beneficiaire:BeneficiaireModel, id:any):Observable<BeneficiaireModel>{
+  SaveBeneficiare(beneficiaire:BeneficiaireModel):Observable<BeneficiaireModel>{
+    const jwt =localStorage.getItem('jwt')
+    console.log(jwt);
+    const headers= {
+      'Content-Type':  'application/json',
+      Authorization: 'Bearer '+jwt,
+
+    }
+    console.log(beneficiaire)
     let host=environment.host
-    return  this.http.post<BeneficiaireModel>(host+"beneficiaire/"+{id},beneficiaire)
+    return  this.http.post<BeneficiaireModel>(host+"benificier",beneficiaire,{headers})
   }
   GetBeneficiares():Observable<BeneficiaireModel[]>{
+    const jwt =localStorage.getItem('jwt')
+    console.log(jwt);
+    const headers= {
+      'Content-Type':  'application/json',
+      Authorization: 'Bearer '+jwt,
+
+    }
     let host=environment.host
-    return this.http.get<BeneficiaireModel[]>(host+"benficeires")
+    return this.http.get<BeneficiaireModel[]>(host+"benificier/me",{headers})
   }
-  DeleteBeneficiares():Observable<BeneficiaireModel[]>{
+  DeleteBeneficiares(id:number){
+    const jwt =localStorage.getItem('jwt')
+    console.log(jwt);
+    const headers= {
+      'Content-Type':  'application/json',
+      Authorization: 'Bearer '+jwt,
+
+    }
     let host=environment.host
-    return this.http.delete<BeneficiaireModel[]>(host+"delete")
+    return this.http.delete(host+"benificier/"+id,{headers})
   }
 
 }

@@ -27,7 +27,7 @@
           <div class="col-7 col-md-8">
             <div class="numbers">
               <p class="card-category">Crédit</p>
-              <p class="card-title">{{result.data[0].credit}}
+              <p class="card-title">{{result.data.credit}}
               <p>
             </div>
           </div>
@@ -53,7 +53,7 @@
           <div class="col-7 col-md-8">
             <div class="numbers">
               <p class="card-category">Débit</p>
-              <p class="card-title">{{result.data[0].debit}}
+              <p class="card-title">{{result.data.debit}}
               <p>
             </div>
           </div>
@@ -79,7 +79,7 @@
           <div class="col-7 col-md-8">
             <div class="numbers">
               <p class="card-category">Bloque</p>
-              <p class="card-title">{{result.data[0].bloce}}
+              <p class="card-title">{{result.data.blocked}}
               <p>
             </div>
           </div>
@@ -105,7 +105,7 @@
           <div class="col-7 col-md-8">
             <div class="numbers">
               <p class="card-category">Echoué</p>
-              <p class="card-title">{{result.data[0].echoues}}
+              <p class="card-title">{{result.data.faild}}
               <p>
             </div>
           </div>
@@ -119,35 +119,39 @@
       </div>
     </div>
   </div>
+  <div class="row">
 
-<div class="row">
-  <div class="col-md-12">
-    <div class="card card-collapse">
-      <div class="card-header">
-        <h4 class="card-title">Mes Comptes</h4>
-      </div>
-      <div class="card-body">
-          <nz-table #basicTable [nzData]="result.data[0].comptes">
-            <thead>
-            <tr>
-              <th>Numéro de Compte</th>
-              <th>Intitulé</th>
-              <th>solde</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let comtp of basicTable.data">
-              <td>{{comtp.num_compte}}</td>
-              <td>{{comtp.intitule}}</td>
-              <td>{{comtp.solde}}</td>
-            </tr>
-            </tbody>
-          </nz-table>
+  </div>
+
+
+</div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card card-collapse">
+          <div class="card-header">
+            <h4 class="card-title">Mes Comptes</h4>
+          </div>
+          <div class="card-body">
+            <nz-table #basicTable [nzData]="result.data.accounts">
+              <thead>
+              <tr>
+                <th>Numéro de Compte</th>
+                <th>Intitulé</th>
+                <th>solde</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let comtp of basicTable.data">
+                <td>{{comtp.accountNum}}</td>
+                <td>{{comtp.name}}</td>
+                <td>{{comtp.balance}}</td>
+              </tr>
+              </tbody>
+            </nz-table>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
 </ng-container>
 </ng-container>
 

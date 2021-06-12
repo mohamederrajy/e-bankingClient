@@ -12,6 +12,7 @@ import {Observable, of} from 'rxjs';
 import {AppDataState,DataStateEnum} from '../../../../state/client.state';
 import {catchError, map, startWith} from 'rxjs/operators';
 import {CompteService} from '../../../Core/Services/compte-service/compte-service.component';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-effectuer-des-virements',
@@ -22,6 +23,7 @@ export class EffectuerDesVirementsComponent implements OnInit {
   beneficiair$: Observable<AppDataState<BeneficiaireModel[]>> | null=null;
   DataStateEnum=DataStateEnum
   validateForm!: FormGroup;
+  saved:any;
   validateFormben!: FormGroup;
   public clinet:ClientModel;
   public comptes:CompteModel [];
@@ -32,7 +34,7 @@ export class EffectuerDesVirementsComponent implements OnInit {
   public agence:AgenceModel;
   loading: boolean = false;
   errorMessage;
-  constructor(private compteService:CompteService , private transactionService:TransactionService, private formBuilder: FormBuilder,private modal: NzModalService, private viewContainerRef: ViewContainerRef,private beneficiareService:BeneficiareService) { }
+  constructor(private router: Router,private compteService:CompteService , private transactionService:TransactionService, private formBuilder: FormBuilder,private modal: NzModalService, private viewContainerRef: ViewContainerRef,private beneficiareService:BeneficiareService) { }
 
   tplModalButtonLoading = false;
   disabled = false;
@@ -42,57 +44,6 @@ export class EffectuerDesVirementsComponent implements OnInit {
     this. OnGetAccount();
     this. OnGetBeneficiair1()
     this.OnGetBeneficiair();
-    this.agence={
-      ville:"agadir",
-      adress:"jfedv",
-      name:"hduc",
-      tele:"defvlkl",
-
-    }
- // @ts-ignore
-    // @ts-ignore
-    this.beneficiaires=[
-
-
- ]
-
-
-    this.transactionModel=[
-      {
-        transactionType:"debit",
-        amount:1222,
-       motif:"transaction",
-        benificier:this.beneficiaire,
-        Libell:"Retrait  de  mohamed errajy"
-
-
-
-      },
-      {
-        transactionType:"credit ",
-        amount:1222,
-        motif:"testcd",
-        benificier:this.beneficiaire,
-        Libell:"Retrait  de  mohamed errajy"
-
-      }
-    ]
-
-    this.comptes =[
-
-    ]
-    this.clinet={
-      nom:"rajy",
-      pernom:"mohamed",
-      address:" agadir",
-      email:"mohamed@gmail.com",
-      sex:"M",
-      phone:38998989443,
-      Comptes :this.comptes,
-      Beneficiaires:this.beneficiaires,
-      agence: this.agence
-
-    }
     this.validateForm = this.formBuilder.group({
       Comptes: [null, [Validators.required]],
       Beneficiaire: [null, [Validators.required]],
@@ -118,13 +69,15 @@ export class EffectuerDesVirementsComponent implements OnInit {
   if(value.Comptes!=null && value.Beneficiaire!=null && value.montant && value.motif!=null){
     this.transaction={
       benificier:value.Beneficiaire,
-      motif:value.motif,
-      amount:value.amount,
+      description:value.motif,
+      amount:value.montant,
+      type:"VIREMENT",
       transactionType:"debit",
-      Libell:"Retrait de montant"+value.amount+"vers"+value.Beneficiaire.firstname,
+      account:value.Comptes,
+      name:"VIREMENT de montant "+value.montant+"  "+"vers"+value.Beneficiaire.firstname,
 
     }
-    this.transactionService.SaveTransaction(this.transaction);
+    this.onSaveTransaction(this.transaction);
     console.log( this.transaction)
 
   }
@@ -164,15 +117,14 @@ export class EffectuerDesVirementsComponent implements OnInit {
   addnewB(data: any) {
     if(data.accountNum!=null && data.firstname!=null && data.lastName!=null && data.tele!=null && data.email !=null ){
       this.beneficiaire={
+        id:undefined,
         accountNum:data.accountNum,
         tele:data.tele,
         email:data.email,
         lastName:data.lastName,
         firstname:data.firstname
       }
-   console.log(data)
-      this.beneficiareService.SaveBeneficiare(this.beneficiaire ,2);
-
+   this.onSeveBenificier(this.beneficiaire);
     }
 
 
@@ -205,10 +157,6 @@ export class EffectuerDesVirementsComponent implements OnInit {
   })
 }
 
-  deletebenf(benf: BeneficiaireModel) {
-    this.beneficiareService.DeleteBeneficiares();
-
-  }
 
   OnGetAccount(){
     this.compteService.GetComptes()
@@ -227,4 +175,31 @@ export class EffectuerDesVirementsComponent implements OnInit {
           this.loading = false;
         })
   }
+  onSeveBenificier(beneficiaire:BeneficiaireModel){
+    this.beneficiareService.SaveBeneficiare(this.beneficiaire).subscribe(data => {
+      this.saved=data;
+      this.validateFormben.reset();
+      window.location.reload();
+      alert('succsess')
+    })
+  }
+
+ onDeleteBenificier(benf: BeneficiaireModel) {
+
+    this.beneficiareService.DeleteBeneficiares(benf.id).subscribe(data => {
+      this.saved=data;
+      alert('deleted')
+      window.location.reload();
+
+    })
+ }
+ onSaveTransaction (transaction:TransactionModel){
+   this.transactionService.SaveTransaction(transaction).subscribe(data => {
+     this.saved=data;
+     this.validateFormben.reset();
+     window.location.reload();
+     alert('succsess')
+   })
+
+ }
 }

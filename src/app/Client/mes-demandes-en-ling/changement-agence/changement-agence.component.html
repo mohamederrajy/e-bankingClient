@@ -24,7 +24,7 @@
             <nz-form-item >
               <nz-form-label [nzSm]="5" [nzXs]="12" [nzSpan]="" nzFor="agenceac" >agence actuelle</nz-form-label>
               <nz-form-control [nzSpan]=""  nzErrorTip="">
-                <input type="text" nz-input formControlName="agenceac" placeholder="{{agence.ville}}"  [disabled]="true"/>
+                <input type="text" nz-input formControlName="agenceac" placeholder="{{clinet.agency.ville}}"  [disabled]="true"/>
               </nz-form-control>
             </nz-form-item>
           </div>
@@ -84,7 +84,7 @@
               <nz-select
                 id="compte" formControlName="compte" nzPlaceHolder="Select compte"
                 nzAllowClear>
-                <nz-option *ngFor="let compt of comptes" [nzLabel]="compt.num_compte" [nzValue]="compt"></nz-option>
+                <nz-option *ngFor="let compt of comptes" [nzLabel]="compt.accountNum" [nzValue]="compt"></nz-option>
               </nz-select>
             </nz-form-control>
           </nz-form-item>
@@ -139,9 +139,11 @@
           </thead>
           <tbody>
           <tr *ngFor="let dem of result.data  ">
-            <td>{{dem.account.num_compte}}</td>
+            <td>{{dem.account.accountNum}}</td>
             <td>{{dem.ville}}</td>
-            <td>{{dem.agnceToTransfer}}</td>
+            <td>{{dem.agnceToTransfer.ville}}</td>
+            <td>{{dem.motif}}</td>
+
 
             <td>  <button class="btn btn-danger" (click)="Ocancel(dem)">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">

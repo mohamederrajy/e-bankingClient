@@ -4,6 +4,7 @@ import {AgenceModel} from '../Agence-model/Agence-model.component';
 
 export class DemandeModel {
   ville!:string;
+  sattus:string;
   type!: string ;
   motif:string;
   account:CompteModel;

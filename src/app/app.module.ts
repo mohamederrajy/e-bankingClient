@@ -8,11 +8,15 @@ import {AppRoutingModule} from './app-routing.module';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 // @ts-ignore
 import { en_US } from 'ng-zorro-antd/i18n';
+
+
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 registerLocaleData(en);
@@ -27,6 +31,7 @@ registerLocaleData(en);
     AppRoutingModule,
     BrowserModule,
     NzTableModule,
+    NzButtonModule,
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule

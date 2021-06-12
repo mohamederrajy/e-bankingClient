@@ -3,9 +3,11 @@ import {BeneficiaireModel} from '../beneficiaire-model/beneficiaire-model.compon
 export class TransactionModel {
   amount!:number;
   transactionType!:string;
-  Libell!:string;
-  motif:string;
+  name!:string;
+  description:string;
+  type:string;
   benificier:BeneficiaireModel;
+  account:CompteModel;
 
 
 }

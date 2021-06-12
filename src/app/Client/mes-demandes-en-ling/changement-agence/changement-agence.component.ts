@@ -13,6 +13,7 @@ import {DashboradModel} from '../../../Core/Models/dashboard-model/dashboard-mod
 import {catchError, map, startWith} from 'rxjs/operators';
 import {AgenceService} from '../../../Core/Services/agence-service/beneficiare-service.component';
 import {CompteService} from '../../../Core/Services/compte-service/compte-service.component';
+import {ClientService} from '../../../Core/Services/client-service/client-service.component';
 @Component({
   selector: 'app-changement-agence',
   templateUrl: './changement-agence.component.html',
@@ -2000,8 +2001,9 @@ export class ChangementAgenceComponent implements OnInit {
       "region": "1"
     }
   ];
+  private saved: any;
 
-  constructor(private compteService:CompteService ,private agenceService:AgenceService,private formBuilder: FormBuilder,private demandeService:DemandeService) { }
+  constructor(private clientservice:ClientService, private compteService:CompteService ,private agenceService:AgenceService,private formBuilder: FormBuilder,private demandeService:DemandeService) { }
 
   ngOnInit(): void {
 
@@ -2016,15 +2018,9 @@ export class ChangementAgenceComponent implements OnInit {
       compte:[null, [Validators.required]],
     });
 
-    this.agence={
-      ville:"agadir",
-      tele:"267890°",
-      name:"effgld",
-      adress:"edfjkgf",
-
-    }
     this.beneficiaires=[
       {
+        id:23,
        email:"gfefe",
         tele:426152,
         lastName:"dfhef",
@@ -2036,51 +2032,21 @@ export class ChangementAgenceComponent implements OnInit {
     ]
 
 
-    this.transactionModel=[
-      {
-        transactionType:"debit ",
-        amount:1222,
-        motif:"etst",
-        benificier:this.beneficiaires[0],
-        Libell:"Retrait  de  mohamed errajy"
-      },
-      {
-        transactionType:"credit ",
-        amount:1222,
-      motif:"etst",
-        benificier:this.beneficiaires[0],
-        Libell:"Retrait  de  mohamed errajy"
 
-      }
-    ]
 
-    this.comptes =[
-
-    ]
-    this.clinet={
-      nom:"rajy",
-      pernom:"mohamed",
-      address:" agadir",
-      email:"mohamed@gmail.com",
-      sex:"M",
-      phone:38998989443,
-      Comptes :this.comptes,
-      Beneficiaires:this.beneficiaires,
-      agence: this.agence
-
-    }
   }
 
   submitForm(data: any) {
     if(data.ville!=null && data.agence!=null && data.motif!=null && data.compte!=null){
       this.demandee={
+        sattus:"pending",
         motif:data.motif,
         ville:data.ville.ville,
         account:data.compte,
         agnceToTransfer:data.agence,
         type:"transfer",
       }
-      console.log(  this.demandee)
+     this.onSaveDemande(this.demandee);
 
 
 
@@ -2089,10 +2055,16 @@ export class ChangementAgenceComponent implements OnInit {
       this.validateForm.controls[i].markAsDirty();
       this.validateForm.controls[i].updateValueAndValidity();
     }
-    this.onSaveDemande(this.demandee)
   }
-  onSaveDemande(data:any){
-    this.demandeService.SaveDemande(this.demandee)
+  onSaveDemande(demande:DemandeModel){
+    this.demandeService.SaveDemande(demande).subscribe(data => {
+      this.saved=data;
+      this.validateForm.reset();
+      window.location.reload();
+      alert('succsess')
+    })
+
+
   }
 OnGetAllAgences(){
     this.loading = true;
@@ -2119,11 +2091,11 @@ OnGetAllAgences(){
   OnGetAgences(){
     this.loading = true;
     this.errorMessage = "";
-    this.agenceService.GetClientAgence()
+    this.clientservice.GetClient()
       .subscribe(
         (response) => {                           //next() callback
           console.log('response received')
-          this.agence = response;
+          this.clinet = response;
         },
         (error) => {                              //error() callback
           console.error('Request failed with error')

@@ -1,16 +1,57 @@
 import { Component, OnInit } from '@angular/core';
-import {FormGroup} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
+
+
+
 
 @Component({
-  selector: 'app-recharge-telecom',
+  selector: 'app-recharge-telecom, nz-demo-tabs-basic',
   templateUrl: './recharge-telecom.component.html',
   styleUrls: ['./recharge-telecom.component.css']
 })
 export class RechargeTelecomComponent implements OnInit {
-  itemsList=[];
-  radioSelected: any;
+  validateForm!: FormGroup;
+  private radioSelected: string;
+  private itemsList: ({
+    value: any;
+    name: string } | { name: string })[];
+  captchaTooltipIcon: NzFormTooltipIcon = {
+    type: 'info-circle',
+    theme: 'twotone'
+  };
 
-  constructor() { }
+
+
+
+  submitForm(): void {
+    for (const i in this.validateForm.controls) {
+      this.validateForm.controls[i].markAsDirty();
+      this.validateForm.controls[i].updateValueAndValidity();
+    }
+  }
+
+  updateConfirmValidator(): void {
+    /** wait for refresh value */
+    Promise.resolve().then(() => this.validateForm.controls.checkPassword.updateValueAndValidity());
+  }
+
+  confirmationValidator = (control: FormControl): { [s: string]: boolean } => {
+    if (!control.value) {
+      return { required: true };
+    } else if (control.value !== this.validateForm.controls.password.value) {
+      return { confirm: true, error: true };
+    }
+    return {};
+  };
+
+  getCaptcha(e: MouseEvent): void {
+    e.preventDefault();
+  }
+
+  constructor(private fb: FormBuilder) {
+
+   }
 
   ngOnInit(): void {
     this.radioSelected = "item_3";
@@ -22,11 +63,21 @@ export class RechargeTelecomComponent implements OnInit {
         name:"inwi"
       },
     ]
+    this.validateForm = this.fb.group({
+      email: [null, [Validators.email, Validators.required]],
+      password: [null, [Validators.required]],
+      checkPassword: [null, [Validators.required, this.confirmationValidator]],
+      nickname: [null, [Validators.required]],
+      phoneNumberPrefix: ['+86'],
+      phoneNumber: [null, [Validators.required]],
+      website: [null, [Validators.required]],
+      captcha: [null, [Validators.required]],
+      agree: [false]
+    })
   }
 
 
-  onItemChange(value: any) {
-    console.log(value)
+  onItemChange(itemsListElement: {value: any; name: string} | {name: string}) {
 
   }
 }
