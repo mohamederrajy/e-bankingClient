@@ -79,10 +79,10 @@ export class RechargeTelecomComponent implements OnInit {
       },
     ]
     this.validateForm = this.fb.group({
-      Comptes: [Validators.required],
-      Tel: [Validators.required],
-      Offer: [Validators.required],
-      Montant: [Validators.required],
+      Comptes:[null,Validators.required],
+      Tel: [null,Validators.required],
+      Offer: [null,Validators.required],
+      Montant:[null,Validators.required],
 
     })
   }

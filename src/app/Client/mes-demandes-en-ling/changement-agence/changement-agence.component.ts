@@ -31,9 +31,13 @@ export class ChangementAgenceComponent implements OnInit {
   public demandee:DemandeModel;
   public agence:AgenceModel
   public agences:AgenceModel[];
-  public demande=[]
+  public object : any ;
+  public update:any;
   loading: boolean = false;
   errorMessage;
+  switchValue = true;
+  switchValue1 = false;
+
   public villes:any=[
     {
       "id": "0",
@@ -2018,18 +2022,6 @@ export class ChangementAgenceComponent implements OnInit {
       compte:[null, [Validators.required]],
     });
 
-    this.beneficiaires=[
-      {
-        id:23,
-       email:"gfefe",
-        tele:426152,
-        lastName:"dfhef",
-        firstname:"dfdf",
-        accountNum:345678
-
-      },
-
-    ]
 
 
 
@@ -2039,7 +2031,8 @@ export class ChangementAgenceComponent implements OnInit {
   submitForm(data: any) {
     if(data.ville!=null && data.agence!=null && data.motif!=null && data.compte!=null){
       this.demandee={
-        sattus:"pending",
+        id:undefined,
+        status:"pending",
         motif:data.motif,
         ville:data.ville.ville,
         account:data.compte,
@@ -2138,7 +2131,37 @@ OnGetAllAgences(){
       catchError(err=>of({dataState:DataStateEnum.Error,errorMessage:err.message}))
     )
   }
-  Ocancel(dem: DemandeModel) {
-    this.demandeService.cancelDemande();
+  Ocancel(object: any) {
+    // @ts-ignore
+    
+
+    this.update={
+
+      status:"canceld",
+    }
+    console.log(object.id);
+    this.onCancelDemande(this.update,object.id);
+    window.location.reload();
+  }
+  onCancelDemande(object:any,id:number){
+    this.loading = true;
+    this.errorMessage = "";
+    this.demandeService.CancelDemande(object,id)
+      .subscribe(
+        (response) => {                           //next() callback
+          console.log('response received')
+          this.object = response;
+        },
+        (error) => {                              //error() callback
+          console.error('Request failed with error')
+          this.errorMessage = error;
+          this.loading = false;
+        },
+        () => {                                   //complete() callback
+          console.error('Request completed')      //This is actually not needed
+          this.loading = false;
+        })
+
+
   }
 }

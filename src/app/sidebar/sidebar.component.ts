@@ -15,23 +15,23 @@ export interface RouteInfo {
 // @ts-ignore
 export const ROUTES: RouteInfo[] = [
   { path: '/Client/Accueil', id: 'Accueil', title: 'Accueil', icon: 'nc-bank', class: '', hasSubMen: true,},
-  { path: '/Client/profil', id: 'profil', title: 'Profil', icon: 'nc-bank', class: '', hasSubMen: true,},
+  { path: '/Client/profil', id: 'profil', title: 'Profil', icon: 'nc-icon nc-single-02', class: '', hasSubMen: true,},
   { path: '/Client/Ma_Relation_Banque', id: 'Ma', title: 'Ma Relation Banque', icon: 'nc-icon nc-favourite-28', hasSubMen: false, class: '' , subMenus:[
-      { path: '/Client/Ma_Relation_Banque/Mes_Compte_denrolement', id: 'Mes_Compte_denrolement', title: 'Mes enrolements', icon: 'nc-icon nc-single-02', class: 'ml-3 lead'},
+      { path: '/Client/Ma_Relation_Banque/Mes_Compte_denrolement', id: 'Mes_Compte_denrolement', title: 'Mes enrolements', icon: 'nc-paper', class: 'ml-3 lead'},
     ]
   },
   { path: '/Client/me-trasactions', id: 'Mes', title: 'Mes Transactions', icon: 'nc-credit-card', class: '' , subMenus:[
-      { path: '/Client/me-trasactions/effectuer-des-virements', id: 'effectuer-des-virements', title: 'effectuer virements', icon: 'nc-icon nc-single-02', class: 'ml-3 lead'},
-      { path: '/Client/me-trasactions/recharge-telecom', id: 'recharge-telecom', title: 'Recharge Telecom', icon: 'nc-icon nc-single-02', class: 'ml-3 lead'},
+      { path: '/Client/me-trasactions/effectuer-des-virements', id: 'effectuer-des-virements', title: 'effectuer virements', icon: 'nc-money-coins', class: 'ml-3 lead'},
+      { path: '/Client/me-trasactions/recharge-telecom', id: 'recharge-telecom', title: 'Recharge Telecom', icon: 'nc-mobile', class: 'ml-3 lead'},
 
     ]
   },
-  { path: '/Client/mes-demandes-en-ling', id: 'Mess', title: 'Mes Demandes Ligne', icon: 'nc-bell-55', class: '' ,subMenus:[
-      { path: '/Client/mes-demandes-en-ling/changement-agence', id: 'changement-agence', title: 'changement agence', icon: 'nc-icon nc-single-02', class: 'ml-3 lead'},
+  { path: '/Client/mes-demandes-en-ling', id: 'Mess', title: 'Mes Demandes Ligne', icon: 'nc-single-copy-04', class: '' ,subMenus:[
+      { path: '/Client/mes-demandes-en-ling/changement-agence', id: 'changement-agence', title: 'changement agence', icon: 'nc-refresh-69', class: 'ml-3 lead'},
   ]},
-  { path: '/Client/Contactez-Nous', id: 'contactc', title: 'Contactez Nous', icon: 'nc-single-02', class: '' },
+  { path: '/Client/Contactez-Nous', id: 'contactc', title: 'Contactez Nous', icon: 'nc-send', class: '' },
 
-  { path: '/Deconnnecter', id: 'Mex', title: 'Me Deconnnecter', icon: 'nc-single-02', class: '' },
+  { path: '/Deconnnecter', id: 'Mex', title: 'Me Deconnnecter', icon: 'nc-button-power', class: '' },
 
 ];
 

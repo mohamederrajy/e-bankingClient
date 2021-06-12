@@ -6,6 +6,7 @@ export class ClientModel {
   firstname !:string;
   lastname !:string;
   email!:string;
+  adress:string;
   username!: number;
   tele!:string;
   cin!:string;

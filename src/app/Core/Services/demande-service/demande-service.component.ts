@@ -35,9 +35,16 @@ export class DemandeService {
     let host=environment.host
     return  this.http.post<DemandeModel>(host+"demande",demande,{headers})
   }
-  cancelDemande(){
+  CancelDemande(object:any,id:number){
+    const jwt =localStorage.getItem('jwt')
+    console.log(jwt);
+    const headers= {
+      'Content-Type':  'application/json',
+      Authorization: 'Bearer '+jwt,
+
+    }
     let host=environment.host
-    return  this.http.delete(host+"delete",)
+    return this.http.put(host+"demande/"+id,object,{headers})
   }
 
 }

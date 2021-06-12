@@ -2,7 +2,6 @@
 <script src="recharge-telecom.component.ts"></script>
 <div class="card">
   <div class="card-header">
-    <h5 class="card-title">Recharge Telecom</h5>
   </div>
   <div class="card-body">
 
@@ -11,7 +10,6 @@
     <nz-tabset style="color: #F15D22;">
       <nz-tab  nzTitle="Recharge Mobile / Internet">
 
-        <h6 class="creances">Liste des créances</h6>
         <form  #f = "ngForm" nz-form [formGroup]="validateForm" (ngSubmit)="submitForm(f.value)">
           <!--<div class="cc-selector">
           <input id="visa" type="radio" name="credit-card" value="telecom" />
@@ -22,7 +20,7 @@
           <label class="drinkcard-cc meditel"for="meditel">Meditel</label>
         </div>-->
 
-          <div class="row" id="operateurList">
+          <div class="row" id="operateurList" style="margin-bottom: 26px;">
             <div class="col-md-12">
 
                   <input

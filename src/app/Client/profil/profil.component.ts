@@ -24,12 +24,9 @@ export class ProfilComponent implements OnInit {
   constructor(private clientService:ClientService) { }
 
   ngOnInit(){
+
     this.OngetClient();
-
-
-
     this.chartColor = "#FFFFFF";
-
     this.canvas = document.getElementById("chartHours");
     this.ctx = this.canvas.getContext("2d");
 
@@ -216,11 +213,10 @@ export class ProfilComponent implements OnInit {
       data: speedData,
       options: chartOptions
     });
+
   }
 
   OngetClient(){
-
-
     this.client$=this.clientService.GetClient().pipe(
       map(data=>{
         return ({dataState:DataStateEnum.LOADED,data:data})}),
@@ -230,8 +226,7 @@ export class ProfilComponent implements OnInit {
 
   }
 
-  onSubmit(data: any) {
-    console.log(data)
+  onSubmit(value: any) {
 
   }
 }
