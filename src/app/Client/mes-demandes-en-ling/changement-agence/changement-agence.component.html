@@ -66,7 +66,6 @@
         </div>
         <div nz-row >
           <div nz-col nzSpan="23">
-
             <nz-form-item >
               <nz-form-label [nzSm]="5" [nzXs]="12" [nzSpan]="" nzFor="motif" nzRequired>Motif</nz-form-label>
               <nz-form-control [nzSpan]=""  nzErrorTip="Please inpute  your motif!">
@@ -133,6 +132,7 @@
             <th>Numéro de Compte</th>
             <th>ville</th>
             <th>agence</th>
+            <th>status</th>
             <th>motif</th>
             <th>Action</th>
           </tr>
@@ -142,14 +142,13 @@
             <td>{{dem.account.accountNum}}</td>
             <td>{{dem.ville}}</td>
             <td>{{dem.agnceToTransfer.ville}}</td>
+            <td>{{dem.status}}</td>
             <td>{{dem.motif}}</td>
 
 
-            <td>  <button class="btn btn-danger" (click)="Ocancel(dem)">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
-                <path d="M1.293 1.293a1 1 0 0 1 1.414 0L8 6.586l5.293-5.293a1 1 0 1 1 1.414 1.414L9.414 8l5.293 5.293a1 1 0 0 1-1.414 1.414L8 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L6.586 8 1.293 2.707a1 1 0 0 1 0-1.414z"/>
-              </svg>
-            </button></td>
+            <td>
+              <nz-switch [(ngModel)]="dem.status=='canceld'? switchValue1:switchValue " [nzControl]="true" (click)="Ocancel(dem)" [nzLoading]="loading"></nz-switch>
+           </td>
           </tr>
           </tbody>
         </nz-table>

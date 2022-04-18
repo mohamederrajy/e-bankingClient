@@ -24,16 +24,14 @@
         <div class="author">
           <a href="#">
             <img class="avatar border-gray" src="assets/img/avatar.png" alt="...">
-            <h5 class="title">{{result.data.firstname}}</h5>
+            <h5 class="title">{{result.data.firstname}} {{result.data.lastname}}</h5>
           </a>
           <p class="description">
-            @chetfaker
+
           </p>
         </div>
         <p class="description text-center">
-          "I like the way you work it
-          <br> No diggity
-          <br> I wanna bag it up"
+
         </p>
       </div>
       <div class="card-footer">
@@ -62,6 +60,9 @@
         </div>
       </div>
     </div>
+
+
+      <div class="col-md-18">
     <div class="card">
       <div class="card-header">
         <h4 class="card-title">Voter Contact </h4>
@@ -72,7 +73,8 @@
             <div class="row">
 
               <div class="col-md-9 col-7" style="margin-top: 12px;">
-               mohamede@gmail.com
+
+                {{result.data.email}}
 
               </div>
               <div class="col-md-1 col-10 text-right">
@@ -86,7 +88,7 @@
 
               <div class="col-md-9 col-7" style="margin-top: 12px;">
 
-                {{result.data.tele}}
+06349857484
               </div>
               <div class="col-md-1 col-10 text-right">
                 <button class="btn btn-sm btn-outline-success btn-round btn-icon"><i class="fa fa-phone-square"></i></button>
@@ -97,7 +99,7 @@
             <div class="row">
 
               <div class="col-md-9 col-7" style="margin-top: 12px;">
-                {{result.data.firstname}}
+                {{result.data.adress}}
 
               </div>
               <div class="col-md-1 col-10 text-right">
@@ -110,10 +112,41 @@
 
     </div>
 
-  </div>
 
+
+
+    </div>
+
+
+
+    </div>
 
   <div class="col-md-8">
+    <div class="col-md-19">
+      <div class="card">
+
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card " style="height: 218px;">
+                <div class="card-header ">
+                  <h5 class="card-title">Solde </h5>
+                <h1 style="font-size: 95Px;
+    text-align: center;
+    font-weight: bold;
+    color: #000000;"> {{result.data.accounts[0].balance}}.00 MAD</h1>
+                </div>
+                <div class="card-body ">
+                  <canvas id=chartHours width="400" height="100"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
     <div class="card card-user">
       <div class="card-header">
         <h5 class="card-title">Edit Profile</h5>
@@ -159,7 +192,7 @@
             <div class="col-md-12">
               <div class="form-group">
                 <label>Address</label>
-                <input type="text" class="form-control" placeholder="Home Address" value="Melbourne, Australia">
+                <input value="{{result.data.email}}" type="text" class="form-control" placeholder="Home Address" value="Melbourne, Australia">
               </div>
             </div>
           </div>
@@ -174,29 +207,9 @@
         </form>
       </div>
     </div>
+
   </div>
 </div>
 
-    <div class="col-md-7">
-      <div class="card card-chart">
-        <div class="card-header">
-          <h5 class="card-title">NASDAQ: AAPL</h5>
-          <p class="card-category">Line Chart with Points</p>
-        </div>
-        <div class="card-body">
-          <canvas id="speedChart" width="400" height="100"></canvas>
-        </div>
-        <div class="card-footer">
-          <div class="chart-legend">
-            <i class="fa fa-circle text-info"></i> Tesla Model S
-            <i class="fa fa-circle text-warning"></i> BMW 5 Series
-          </div>
-          <hr/>
-          <div class="card-stats">
-            <i class="fa fa-check"></i> Data information certified
-          </div>
-        </div>
-      </div>
-    </div>
   </ng-container>
 </ng-container>

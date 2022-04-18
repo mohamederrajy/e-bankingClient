@@ -46,4 +46,5 @@ export class BeneficiareService {
     return this.http.delete(host+"benificier/"+id,{headers})
   }
 
+
 }

@@ -1,7 +1,7 @@
 
+<script src="recharge-telecom.component.ts"></script>
 <div class="card">
   <div class="card-header">
-    <h5 class="card-title">Recharge Telecom</h5>
   </div>
   <div class="card-body">
 
@@ -10,8 +10,7 @@
     <nz-tabset style="color: #F15D22;">
       <nz-tab  nzTitle="Recharge Mobile / Internet">
 
-        <h6 class="creances">Liste des créances</h6>
-        <form  nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+        <form  #f = "ngForm" nz-form [formGroup]="validateForm" (ngSubmit)="submitForm(f.value)">
           <!--<div class="cc-selector">
           <input id="visa" type="radio" name="credit-card" value="telecom" />
           <label class="drinkcard-cc visa" for="visa">Maroc Telecom</label>
@@ -21,13 +20,12 @@
           <label class="drinkcard-cc meditel"for="meditel">Meditel</label>
         </div>-->
 
-          <div class="row" id="operateurList">
+          <div class="row" id="operateurList" style="margin-bottom: 26px;">
             <div class="col-md-12">
-
 
                   <input
                     type="radio" name="emotion"
-                    id="sad" class="input-hidden"   value="{{itemsList[1].value}}" (change)="onItemChange(itemsList[1])">
+                    id="sad" class="input-hidden"   (change)="onItemChange(itemsList[0])">
                   <label for="sad">
                     <img
                       src="http://www.iam.ma/ImagesMarocTelecom/Photothèque/Images-grandes/maroc-telecom-bleu-fr-grande.jpg"
@@ -35,7 +33,7 @@
                   </label>
 
                   <input
-                    value="{{itemsList[0].value}}" (change)="onItemChange(itemsList[0])"
+                    (change)="onItemChange(itemsList[1])"
                     type="radio" name="emotion"
                     id="happy" class="input-hidden" />
                   <label for="happy">
@@ -43,7 +41,8 @@
                       src="https://inwi.ma/assets/logo-seo.jpg"
                       alt="I'm happy" />
                   </label><input
-                  type="radio" name="emotion"
+               (change)="onItemChange(itemsList[2])"
+              type="radio" name="emotion"
                   id="d" class="input-hidden" />
                   <label for="d">
                     <img
@@ -52,6 +51,7 @@
                   </label>
 
                   <input
+                    (change)="onItemChange(itemsList[3])"
                     type="radio" name="emotion"
                     id="v" class="input-hidden" />
                   <label for="v">
@@ -73,9 +73,10 @@
             <nz-form-label [nzSm]="6" [nzXs]="12" [nzSpan]="" nzFor="Compte" nzRequired>Compte à Débiter </nz-form-label>
             <nz-form-control [nzSpan]="" nzErrorTip="Please select your Compte!">
               <nz-select
+                formControlName="Comptes"
                 id="Compte"  nzPlaceHolder="Select Account"
                 nzAllowClear>
-                <nz-option nzLabel="+8" nzValue="+86"></nz-option>
+                <nz-option *ngFor="let compte of comptes" [nzLabel]="compte.accountNum" [nzValue]="compte"></nz-option>
               </nz-select>
             </nz-form-control>
           </nz-form-item>
@@ -86,9 +87,8 @@
             <div nz-col nzSpan="24" class="Qrow">
               <nz-form-item >
                 <nz-form-label [nzSm]="6" [nzXs]="12" [nzSpan]="" nzFor="Tel" nzRequired>Numéro de Téléphone</nz-form-label>
-                <nz-form-control [nzSpan]="" nzErrorTip="Please select your Compte!">
-                  <input type="text" nz-input  placeholder="Telephone" />
-
+                <nz-form-control [nzSpan]="" nzErrorTip="Please select your tele!">
+                  <input   id="Tel"  formControlName="Tel" type="text" nz-input  placeholder="Telephone" />
                 </nz-form-control>
               </nz-form-item>
             </div>
@@ -99,12 +99,12 @@
               <nz-form-item >
                 <nz-form-label [nzSm]="6" [nzXs]="12" [nzSpan]="" nzFor="Offre" nzRequired>Offre </nz-form-label>
                 <nz-form-control [nzSpan]="" nzErrorTip="Please select your Compte!">
-                  <nz-select
+                  <nz-select formControlName="Offer"
                     id="Offre"  nzPlaceHolder="Select Offre"
                     nzAllowClear>
-                    <nz-option nzLabel="*2" nzValue="+86"></nz-option>
-                    <nz-option nzLabel="*3" nzValue="+86"></nz-option>
-                    <nz-option nzLabel="*6" nzValue="+86"></nz-option>
+                    <nz-option nzLabel="*2" nzValue="*2"></nz-option>
+                    <nz-option nzLabel="*3" nzValue="*3"></nz-option>
+                    <nz-option nzLabel="*6" nzValue="*6"></nz-option>
                   </nz-select>
                 </nz-form-control>
               </nz-form-item>
@@ -114,9 +114,9 @@
           <div nz-row >
             <div nz-col nzSpan="24" class="Qrow">
               <nz-form-item >
-                <nz-form-label [nzSm]="6" [nzXs]="12" [nzSpan]="" nzFor="Compte" nzRequired>Montant </nz-form-label>
+                <nz-form-label [nzSm]="6" [nzXs]="12" [nzSpan]="" nzFor="Montant" nzRequired>Montant </nz-form-label>
                 <nz-form-control [nzSpan]="" nzErrorTip="Please Enter an Amount">
-                  <input type="text" nz-input  placeholder="Montant" />
+                  <input  id="Montant" formControlName="Montant" type="text" nz-input  placeholder="Montant" />
 
                 </nz-form-control>
               </nz-form-item>

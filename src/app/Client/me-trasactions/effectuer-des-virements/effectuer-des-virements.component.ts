@@ -64,7 +64,6 @@ export class EffectuerDesVirementsComponent implements OnInit {
 
 
   }
-
   submitForm(value: any) {
   if(value.Comptes!=null && value.Beneficiaire!=null && value.montant && value.motif!=null){
     this.transaction={
